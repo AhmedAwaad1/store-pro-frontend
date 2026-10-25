@@ -3,7 +3,10 @@ import { existsSync, readFileSync, readdirSync, rmSync } from 'node:fs'
 
 const projectRoot = process.cwd()
 const apiBase = process.env.NUXT_PUBLIC_API_BASE?.trim()
-const routes = new Set(['/', '/services', '/portfolio', '/pricing', '/about', '/contact', '/blog'])
+const routes = new Set([
+  '/', '/services', '/portfolio', '/pricing', '/about', '/contact', '/blog',
+  '/admin', '/admin/dashboard', '/admin/login', '/admin/inquiries', '/admin/contacts', '/admin/content', '/admin/blog', '/admin/seo',
+])
 
 if (apiBase) {
   try {

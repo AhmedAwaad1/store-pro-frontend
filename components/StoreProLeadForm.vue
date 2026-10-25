@@ -10,13 +10,12 @@
       <label>{{ isEnglish ? 'Interested in' : 'الخدمة المطلوبة' }}<select v-model="form.service_interest" name="service_interest"><option value="">{{ isEnglish ? 'Choose a service' : 'اختر الخدمة' }}</option><option value="store-design">{{ isEnglish ? 'Store design and setup' : 'تصميم وتجهيز متجر' }}</option><option value="growth">{{ isEnglish ? 'Growth and integrations' : 'التوسع والتكاملات' }}</option><option value="mobile-app">{{ isEnglish ? 'Mobile application' : 'تطبيق جوال' }}</option><option value="custom">{{ isEnglish ? 'Custom solution' : 'حل مخصص' }}</option></select></label>
       <label>{{ isEnglish ? 'Package' : 'الباقة' }}<select v-model="form.package_interest" name="package_interest"><option value="">{{ isEnglish ? 'Not sure yet' : 'لم أحدد بعد' }}</option><option value="starter">{{ isEnglish ? 'Essential' : 'الأساسية' }}</option><option value="growth">{{ isEnglish ? 'Professional' : 'الاحترافية' }}</option><option value="enterprise">{{ isEnglish ? 'Business' : 'الشركات' }}</option></select></label>
       <label class="sp-form-wide">{{ isEnglish ? 'What do you need?' : 'كيف يمكننا مساعدتك؟' }}<textarea v-model.trim="form.message" name="message" rows="4" maxlength="5000" required /></label>
-      <div class="sp-form-wide sp-form-submit"><button class="sp-btn sp-btn-primary" type="submit" :disabled="busy">{{ busy ? (isEnglish ? 'Sending…' : 'جارٍ الإرسال…') : (isEnglish ? 'Send request' : 'أرسل طلبك') }} <ArrowUpLeft v-if="!busy" :size="17" /></button><p v-if="statusMessage" :class="['sp-form-status', { 'sp-form-error': statusError }]" role="status" aria-live="polite">{{ statusMessage }}</p></div>
+      <div class="sp-form-wide sp-form-submit"><button class="sp-btn sp-btn-primary" type="submit" :disabled="busy">{{ busy ? (isEnglish ? 'Sending…' : 'جارٍ الإرسال…') : (isEnglish ? 'Send request' : 'أرسل طلبك') }} <StoreProDirectionalArrow v-if="!busy" :size="17" /></button><p v-if="statusMessage" :class="['sp-form-status', { 'sp-form-error': statusError }]" role="status" aria-live="polite">{{ statusMessage }}</p></div>
     </form>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ArrowUpLeft } from 'lucide-vue-next'
 const props = defineProps<{ title?: string; description?: string; source?: string }>()
 const { isEnglish } = useLocale()
 const { request } = useApi()

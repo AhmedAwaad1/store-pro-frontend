@@ -11,6 +11,7 @@ const STORAGE_KEY = 'storepro-consent-preferences'
 export const useConsent = () => {
   const preferences = useState<ConsentPreferences | null>('storepro-consent-preferences', () => null)
   const settingsOpen = useState<boolean>('storepro-consent-settings-open', () => false)
+  const ready = useState<boolean>('storepro-consent-ready', () => false)
 
   const save = (analytics: boolean, marketing: boolean) => {
     preferences.value = { necessary: true, analytics, marketing, version: 1, updatedAt: new Date().toISOString() }
@@ -27,12 +28,15 @@ export const useConsent = () => {
       }
     } catch {
       preferences.value = null
+    } finally {
+      ready.value = true
     }
   }
 
   return {
     preferences: readonly(preferences),
     settingsOpen: readonly(settingsOpen),
+    ready: readonly(ready),
     needsChoice: computed(() => preferences.value === null),
     openSettings: () => { settingsOpen.value = true },
     closeSettings: () => { settingsOpen.value = false },

@@ -1,5 +1,5 @@
 const legacyRetailPrefixes = [
-  '/account', '/admin', '/auth/google', '/branches', '/brands', '/cart', '/categories', '/category', '/checkout', '/collections', '/compare', '/forgot-password', '/login', '/offers', '/order-success', '/product', '/products', '/register', '/search', '/sub-category', '/verify-email', '/wishlist',
+  '/account', '/auth/google', '/branches', '/brands', '/cart', '/categories', '/category', '/checkout', '/collections', '/compare', '/forgot-password', '/login', '/offers', '/order-success', '/product', '/products', '/register', '/search', '/sub-category', '/verify-email', '/wishlist',
 ]
 
 export default defineNuxtRouteMiddleware(async (to) => {

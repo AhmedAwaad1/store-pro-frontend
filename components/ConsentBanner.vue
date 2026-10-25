@@ -1,5 +1,5 @@
 <template>
-  <section v-if="needsChoice || settingsOpen" class="consent-panel" role="region" :aria-label="isEnglish ? 'Privacy preferences' : 'تفضيلات الخصوصية'">
+  <section v-if="ready && (needsChoice || settingsOpen)" class="consent-panel" role="region" :aria-label="isEnglish ? 'Privacy preferences' : 'تفضيلات الخصوصية'">
     <template v-if="settingsOpen">
       <div class="consent-copy"><strong>{{ isEnglish ? 'Privacy preferences' : 'تفضيلات الخصوصية' }}</strong><p>{{ isEnglish ? 'Choose which optional measurement tools StorePro may use. Essential storage is always active for site security and saved preferences.' : 'اختر أدوات القياس الاختيارية التي تسمح لـ StorePro باستخدامها. التخزين الضروري يعمل دائمًا لأمان الموقع وحفظ تفضيلاتك.' }}</p></div>
       <label class="consent-option"><span><strong>{{ isEnglish ? 'Essential' : 'ضرورية' }}</strong><small>{{ isEnglish ? 'Site security and preferences' : 'أمان الموقع والتفضيلات' }}</small></span><input type="checkbox" checked disabled></label>
@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 const { isEnglish } = useLocale()
-const { preferences, needsChoice, settingsOpen, acceptAll, rejectOptional, openSettings, save } = useConsent()
+const { preferences, needsChoice, settingsOpen, ready, acceptAll, rejectOptional, openSettings, save } = useConsent()
 const analytics = ref(false)
 const marketing = ref(false)
 watch(settingsOpen, (open) => {
