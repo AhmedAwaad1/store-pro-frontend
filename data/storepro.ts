@@ -18,9 +18,9 @@ export const storeProBenefits: Array<{ icon: string; title: StoreProLocaleText; 
 ]
 
 export const storeProPortfolio = [
-  { id: 'fashion', title: { ar: 'متجر أزياء', en: 'Fashion storefront' }, category: { ar: 'الأزياء والإكسسوارات', en: 'Fashion and accessories' }, image: '/images/storepro/portfolio-fashion.png' },
-  { id: 'beauty', title: { ar: 'متجر عناية وجمال', en: 'Beauty storefront' }, category: { ar: 'مستحضرات التجميل والعناية', en: 'Beauty and skincare' }, image: '/images/storepro/portfolio-beauty.png' },
-  { id: 'electronics', title: { ar: 'متجر إلكترونيات', en: 'Electronics storefront' }, category: { ar: 'الأجهزة والتقنية', en: 'Devices and technology' }, image: '/images/storepro/portfolio-electronics.png' },
+  { id: 'fashion', title: { ar: 'متجر أزياء', en: 'Fashion storefront' }, category: { ar: 'الأزياء والإكسسوارات', en: 'Fashion and accessories' }, image: '/images/storepro/portfolio-fashion.webp' },
+  { id: 'beauty', title: { ar: 'متجر عناية وجمال', en: 'Beauty storefront' }, category: { ar: 'مستحضرات التجميل والعناية', en: 'Beauty and skincare' }, image: '/images/storepro/portfolio-beauty.webp' },
+  { id: 'electronics', title: { ar: 'متجر إلكترونيات', en: 'Electronics storefront' }, category: { ar: 'الأجهزة والتقنية', en: 'Devices and technology' }, image: '/images/storepro/portfolio-electronics.webp' },
 ]
 
 export const storeProPlans = [

@@ -9,7 +9,7 @@
           <div class="sp-hero-actions"><NuxtLink class="sp-btn sp-btn-primary" to="/contact#inquiry">{{ isEnglish ? 'Start your store' : 'ابدأ متجرك الآن' }} <ArrowUpLeft :size="19" /></NuxtLink><NuxtLink class="sp-btn sp-btn-outline-light" to="/services">{{ isEnglish ? 'Explore services' : 'اكتشف خدماتنا' }} <CirclePlay :size="18" /></NuxtLink></div>
           <ul class="sp-hero-points"><li><CheckCircle2 :size="17" />{{ isEnglish ? 'A plan shaped around your needs' : 'حل يناسب احتياجات نشاطك' }}</li><li><CheckCircle2 :size="17" />{{ isEnglish ? 'Launch and ongoing support' : 'دعم في الإطلاق وما بعده' }}</li></ul>
         </div>
-        <div class="sp-hero-visual"><img src="/images/storepro/hero-dashboard.png" alt="" width="1672" height="1000" fetchpriority="high" /><span class="sp-hero-visual-caption"><span class="sp-live-dot"></span>{{ isEnglish ? 'One place to manage your store' : 'كل أدوات متجرك في مكان واحد' }}</span></div>
+        <div class="sp-hero-visual"><img src="/images/storepro/hero-dashboard.webp" alt="" width="1672" height="941" fetchpriority="high" /><span class="sp-hero-visual-caption"><span class="sp-live-dot"></span>{{ isEnglish ? 'One place to manage your store' : 'كل أدوات متجرك في مكان واحد' }}</span></div>
       </div>
     </section>
 
