@@ -1,0 +1,49 @@
+<template>
+  <main class="search-admin"><header><div><p class="eyebrow">3B / ADMIN</p><h1>Search & comparison</h1><p>Improve product discovery and review the searches customers could not satisfy.</p></div><button @click="load">Refresh</button></header>
+    <p v-if="error" class="notice error" role="alert">{{ error }}</p><p v-if="notice" class="notice" role="status">{{ notice }}</p><p v-if="loading" role="status" class="loading">Loading search settings…</p>
+    <nav class="admin-shortcuts" aria-label="Admin pages"><NuxtLink to="/admin/catalog">Catalog</NuxtLink><NuxtLink to="/admin/taxonomy">Categories & specifications</NuxtLink><NuxtLink to="/admin/inventory">Inventory</NuxtLink><NuxtLink to="/admin/pricing">Pricing</NuxtLink></nav>
+    <section class="panel"><h2>Search synonyms</h2><p class="help">Add equivalent terms so a customer can use either phrase to find the same catalog items.</p><form class="inline-form" @submit.prevent="saveSynonym"><label>Primary term<input v-model="synonym.term" required maxlength="120" placeholder="headphones"></label><label>Equivalent terms<input v-model="synonym.terms" required maxlength="700" placeholder="headset, earphones"></label><button :disabled="busy">Save synonyms</button></form>
+      <article v-for="item in data.synonyms" :key="item.id" class="record"><div><strong>{{ item.term }}</strong><small>{{ item.synonyms.join(', ') }}</small></div><button @click="deleteSynonym(item.id)">Delete</button></article><p v-if="!data.synonyms.length" class="empty">No synonym rules yet.</p>
+    </section>
+    <section class="panel"><h2>Search boosts</h2><p class="help">Boost a product or brand after exact SKU and model matches; values range from 1 to 100.</p><form class="inline-form" @submit.prevent="saveBoost"><label>Type<select v-model="boost.target_type"><option value="product">Product</option><option value="brand">Brand</option></select></label><label>Record ID<input v-model.number="boost.target_id" type="number" min="1" required></label><label>Boost weight<input v-model.number="boost.boost" type="number" min="1" max="100" required></label><button :disabled="busy">Save boost</button></form>
+      <article v-for="item in data.boosts" :key="item.id" class="record"><div><strong>{{ item.target_type }} #{{ item.target_id }}</strong><small>Weight {{ item.boost }}</small></div><button @click="deleteBoost(item.id)">Delete</button></article><p v-if="!data.boosts.length" class="empty">No search boosts yet.</p>
+    </section>
+    <section class="panel"><h2>Filter order by category</h2><p class="help">The storefront only displays filterable specifications assigned to the chosen category.</p><label class="category-select">Category<select v-model.number="categoryId"><option :value="0">Choose category</option><option v-for="category in data.categories" :key="category.id" :value="category.id">{{ category.name_en }} / {{ category.name_ar }}</option></select></label>
+      <div v-if="selectedSpecifications.length" class="ordered-filters"><article v-for="(specification, index) in selectedSpecifications" :key="specification.id" class="record"><div><strong>{{ specification.name_en }} / {{ specification.name_ar }}</strong><small>{{ specification.key }}</small></div><div class="order-actions"><button :disabled="index === 0 || busy" :aria-label="`Move ${specification.name_en} up`" @click="moveFilter(index, -1)">↑</button><button :disabled="index === selectedSpecifications.length - 1 || busy" :aria-label="`Move ${specification.name_en} down`" @click="moveFilter(index, 1)">↓</button></div></article><button class="primary" :disabled="busy" @click="saveFilterOrder">Save category filter order</button></div>
+      <p v-else class="empty">{{ categoryId ? 'No filterable specifications are assigned to this category yet.' : 'Select a category to manage its filters.' }}</p>
+    </section>
+    <div class="reports"><section class="panel"><h2>Popular searches · last 30 days</h2><table><thead><tr><th>Query</th><th>Searches</th></tr></thead><tbody><tr v-for="item in data.popular" :key="item.query"><td>{{ item.query }}</td><td>{{ item.searches }}</td></tr></tbody></table><p v-if="!data.popular.length" class="empty">Search reports appear as customers use search.</p></section>
+      <section class="panel"><h2>Zero-result searches · last 30 days</h2><table><thead><tr><th>Query</th><th>Searches</th></tr></thead><tbody><tr v-for="item in data.zero_results" :key="item.query"><td>{{ item.query }}</td><td>{{ item.searches }}</td></tr></tbody></table><p v-if="!data.zero_results.length" class="empty">No zero-result searches recorded.</p></section></div>
+    <p class="privacy-note">Reports keep the redacted search phrase and result count only. They do not store account, IP, device, or session identifiers.</p>
+  </main>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: ['admin'], adminPermission: 'merchandising.manage' })
+const { request } = useApi()
+const data = ref<any>({ popular: [], zero_results: [], synonyms: [], boosts: [], categories: [] })
+const synonym = reactive({ term: '', terms: '' })
+const boost = reactive({ target_type: 'product', target_id: 0, boost: 10 })
+const categoryId = ref(0)
+const loading = ref(false)
+const busy = ref(false)
+const error = ref('')
+const notice = ref('')
+const selectedCategory = computed(() => data.value.categories.find((item: any) => item.id === categoryId.value))
+const selectedSpecifications = computed(() => [...(selectedCategory.value?.specifications || [])].sort((a: any, b: any) => (a.pivot?.sort_order ?? 0) - (b.pivot?.sort_order ?? 0)))
+
+async function load() { loading.value = true; error.value = ''; try { data.value = (await request<any>('/admin/search')).data } catch (e: any) { error.value = e?.data?.message || 'Could not load search settings.' } finally { loading.value = false } }
+async function saveSynonym() { await run(async () => { await request('/admin/search/synonyms', { method: 'POST', body: { term: synonym.term, synonyms: synonym.terms.split(',').map(value => value.trim()).filter(Boolean) } }); synonym.term = ''; synonym.terms = ''; notice.value = 'Synonyms saved.' }) }
+async function deleteSynonym(id: number) { await run(async () => { await request(`/admin/search/synonyms/${id}`, { method: 'DELETE' }); notice.value = 'Synonym deleted.' }) }
+async function saveBoost() { await run(async () => { await request('/admin/search/boosts', { method: 'POST', body: boost }); notice.value = 'Search boost saved.' }) }
+async function deleteBoost(id: number) { await run(async () => { await request(`/admin/search/boosts/${id}`, { method: 'DELETE' }); notice.value = 'Search boost deleted.' }) }
+function moveFilter(index: number, delta: number) { const rows = [...selectedSpecifications.value]; const next = index + delta; if (!rows[next]) return; [rows[index], rows[next]] = [rows[next], rows[index]]; data.value.categories = data.value.categories.map((category: any) => category.id === categoryId.value ? { ...category, specifications: rows.map((row, sort_order) => ({ ...row, pivot: { ...row.pivot, sort_order } })) } : category) }
+async function saveFilterOrder() { await run(async () => { await request(`/admin/search/categories/${categoryId.value}/filter-order`, { method: 'PUT', body: { specifications: selectedSpecifications.value.map((row: any, sort_order: number) => ({ specification_id: row.id, sort_order })) } }); notice.value = 'Category filter order saved.' }) }
+async function run(action: () => Promise<void>) { busy.value = true; error.value = ''; notice.value = ''; try { await action(); await load() } catch (e: any) { error.value = e?.data?.message || 'Could not save search settings.' } finally { busy.value = false } }
+onMounted(load)
+</script>
+
+<style scoped>
+.search-admin{max-width:1180px;margin:0 auto;padding:34px 18px 64px;color:#182631}.search-admin header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:22px}.eyebrow{margin:0;color:#2675d8;font-size:12px;font-weight:800;letter-spacing:.14em}h1{margin:5px 0;font-size:30px}.search-admin header p:last-child,.help,.privacy-note{color:#64748b}.panel{margin:16px 0;padding:22px;border:1px solid #e0e6ea;border-radius:14px;background:white}.panel h2{margin:0 0 5px;font-size:18px}.help{margin:0 0 14px;font-size:.84rem}.admin-shortcuts{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}.admin-shortcuts a{color:#1769c2;font-weight:700}.inline-form{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}.inline-form label,.category-select{display:grid;gap:5px;min-width:160px;color:#53616c;font-size:.8rem}.inline-form input,.inline-form select,.category-select select{min-height:40px;border:1px solid #d5dde3;border-radius:8px;padding:8px 10px;background:#fff;font:inherit}.inline-form label:nth-child(2){flex:1}.panel button{min-height:38px;border:1px solid #d5dde3;border-radius:8px;background:white;padding:7px 12px;cursor:pointer}.panel button.primary,.inline-form button{background:#1769c2;border-color:#1769c2;color:#fff}.panel button:disabled{opacity:.5}.record{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid #e8ebef}.record strong,.record small{display:block}.record small{margin-top:3px;color:#64748b}.ordered-filters{margin-top:12px}.order-actions{display:flex;gap:7px}.category-select{max-width:420px}.reports{display:grid;grid-template-columns:1fr 1fr;gap:14px}.reports .panel{margin-top:0}.reports table{width:100%;border-collapse:collapse}.reports th,.reports td{padding:8px;border-bottom:1px solid #edf0f2;text-align:start}.empty{color:#64748b}.privacy-note{font-size:.8rem}.notice{padding:11px;border-radius:8px;background:#eff8f3;color:#087443}.notice.error{background:#fff1f0;color:#b42318}
+@media(max-width:760px){.search-admin header{flex-direction:column}.reports{grid-template-columns:1fr}.panel{padding:16px}}
+</style>

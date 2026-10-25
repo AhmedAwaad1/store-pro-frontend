@@ -1,0 +1,13 @@
+.nuxt
+.output
+dist
+node_modules
+.sites-runtime
+.env
+.idea/
+.DS_Store
+*.bak
+
+# Environment files
+.env.*
+!.env.example
