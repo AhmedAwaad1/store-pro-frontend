@@ -9,23 +9,34 @@ type SiteContentRecord = {
 export const useSiteContent = async () => {
   const config = useRuntimeConfig()
   const { locale } = useLocale()
+  const fetchPages = async (): Promise<Record<string, Record<string, any>>> => {
+    const apiBase = import.meta.server
+      ? new URL(String(config.public.apiBase).replace(/\/?$/, '/'), String(config.public.siteUrl)).toString()
+      : config.public.apiBase
+    const response = await $fetch<{ data: SiteContentRecord[] | { data?: SiteContentRecord[] } }>('/site-content', {
+      baseURL: apiBase,
+      timeout: 8000,
+    })
+    const records = Array.isArray(response.data) ? response.data : Array.isArray(response.data?.data) ? response.data.data : []
+    return Object.fromEntries(records.map((record) => [record.page_key, record.content || {}]))
+  }
   const { data: pages, pending, error, refresh } = await useAsyncData<Record<string, Record<string, any>>>(
-    'storepro-site-content',
-    async () => {
-      const response = await $fetch<{ data: SiteContentRecord[] | { data?: SiteContentRecord[] } }>('/site-content', {
-        baseURL: config.public.apiBase,
-      })
-      const records = Array.isArray(response.data) ? response.data : Array.isArray(response.data?.data) ? response.data.data : []
-      return Object.fromEntries(records.map((record) => [record.page_key, record.content || {}]))
-    },
+    'storepro-site-content', fetchPages,
     {
-      server: false,
       default: () => ({}),
       dedupe: 'defer',
       getCachedData: (key, nuxtApp, context) =>
         context.cause === 'initial' ? nuxtApp.payload.data[key] : undefined,
     },
   )
+  const refreshSilently = async () => {
+    try {
+      const updated = await fetchPages()
+      if (updated.global) pages.value = updated
+    } catch {
+      // Keep the prerendered content available when the CMS cannot be reached.
+    }
+  }
 
   const page = (key: string): ComputedRef<Record<string, any>> => computed(() => pages.value?.[key] || {})
   const text = (value: unknown): string => {
@@ -36,5 +47,5 @@ export const useSiteContent = async () => {
     return typeof selected === 'string' || typeof selected === 'number' ? String(selected) : ''
   }
 
-  return { pages, page, text, pending, error, refresh }
+  return { pages, page, text, pending, error, refresh, refreshSilently }
 }

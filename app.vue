@@ -4,7 +4,7 @@
     <NuxtPage v-else />
   </div>
   <div v-else class="sp-app">
-    <main v-if="siteContentPending" class="sp-content-status" role="status" aria-live="polite">
+    <main v-if="siteContentPending && !hasSiteContent" class="sp-content-status" role="status" aria-live="polite">
       <div class="sp-content-status-card"><span class="sp-content-spinner" aria-hidden="true"></span><p>Loading website content…</p></div>
     </main>
     <main v-else-if="siteContentUnavailable" class="sp-content-status" role="alert">
@@ -24,8 +24,14 @@ const route = useRoute()
 const config = useRuntimeConfig()
 const { locale, direction } = useLocale()
 const { theme } = useStoreProTheme()
-const { pages, page, text, pending: siteContentPending, error: siteContentError, refresh: refreshSiteContent } = await useSiteContent()
+const { pages, page, text, pending: siteContentPending, refresh: refreshSiteContent, refreshSilently } = await useSiteContent()
 const global = page('global')
+const hasSiteContent = computed(() => Boolean(pages.value?.global))
+
+// Refresh prerendered content without hiding the existing page during the request.
+onMounted(() => {
+  if (!isAdminRoute.value && hasSiteContent.value) refreshSilently()
+})
 const isAdminRoute = computed(() => route.path === '/admin' || route.path.startsWith('/admin/'))
 const isAdminLoginRoute = computed(() => route.path.replace(/\/+$/, '') === '/admin/login')
 const siteOrigin = computed(() => String(config.public.siteUrl || '').replace(/\/$/, ''))
@@ -40,7 +46,7 @@ const requiredContentKey = computed(() => {
 })
 const siteContentUnavailable = computed(() => {
   if (siteContentPending.value) return false
-  return Boolean(siteContentError.value) || !pages.value?.global || Boolean(requiredContentKey.value && !pages.value?.[requiredContentKey.value])
+  return !pages.value?.global || Boolean(requiredContentKey.value && !pages.value?.[requiredContentKey.value])
 })
 
 useHead(() => ({
