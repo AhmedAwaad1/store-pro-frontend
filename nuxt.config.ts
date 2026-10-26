@@ -22,13 +22,6 @@ export default defineNuxtConfig({
     families: { Cairo: [400, 500, 600, 700, 800] },
     display: 'swap',
   },
-  app: {
-    head: {
-      htmlAttrs: { lang: 'ar', dir: 'rtl' },
-      title: 'StorePro | حلول التجارة الإلكترونية',
-      meta: [{ name: 'description', content: 'حلول متكاملة لبناء متجرك الإلكتروني وإدارة أعمالك.' }],
-    },
-  },
   vite: {
     server: { allowedHosts: ['.trycloudflare.com'] },
   },
@@ -38,4 +31,3 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-01-01',
 })
-

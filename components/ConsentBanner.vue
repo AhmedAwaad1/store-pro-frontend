@@ -1,21 +1,23 @@
 <template>
-  <section v-if="ready && (needsChoice || settingsOpen)" class="consent-panel" role="region" :aria-label="isEnglish ? 'Privacy preferences' : 'تفضيلات الخصوصية'">
+  <section v-if="ready && (needsChoice || settingsOpen)" class="consent-panel" role="region" :aria-label="text(consent.region)">
     <template v-if="settingsOpen">
-      <div class="consent-copy"><strong>{{ isEnglish ? 'Privacy preferences' : 'تفضيلات الخصوصية' }}</strong><p>{{ isEnglish ? 'Choose which optional measurement tools StorePro may use. Essential storage is always active for site security and saved preferences.' : 'اختر أدوات القياس الاختيارية التي تسمح لـ StorePro باستخدامها. التخزين الضروري يعمل دائمًا لأمان الموقع وحفظ تفضيلاتك.' }}</p></div>
-      <label class="consent-option"><span><strong>{{ isEnglish ? 'Essential' : 'ضرورية' }}</strong><small>{{ isEnglish ? 'Site security and preferences' : 'أمان الموقع والتفضيلات' }}</small></span><input type="checkbox" checked disabled></label>
-      <label class="consent-option"><span><strong>{{ isEnglish ? 'Analytics' : 'التحليلات' }}</strong><small>{{ isEnglish ? 'Site usage and page performance' : 'استخدام الموقع وأداء الصفحات' }}</small></span><input v-model="analytics" type="checkbox"></label>
-      <label class="consent-option"><span><strong>{{ isEnglish ? 'Marketing' : 'التسويق' }}</strong><small>{{ isEnglish ? 'Advertising measurement and conversion events' : 'قياس الإعلانات وأحداث التحويل' }}</small></span><input v-model="marketing" type="checkbox"></label>
-      <div class="consent-actions"><button type="button" class="secondary" @click="rejectOptional">{{ isEnglish ? 'Reject optional' : 'رفض الاختياري' }}</button><button type="button" class="primary" @click="save(analytics, marketing)">{{ isEnglish ? 'Save choices' : 'حفظ الاختيارات' }}</button></div>
+      <div class="consent-copy"><strong>{{ text(consent.title) }}</strong><p>{{ text(consent.settings_description) }}</p></div>
+      <label class="consent-option"><span><strong>{{ text(consent.essential) }}</strong><small>{{ text(consent.essential_description) }}</small></span><input type="checkbox" checked disabled></label>
+      <label class="consent-option"><span><strong>{{ text(consent.analytics) }}</strong><small>{{ text(consent.analytics_description) }}</small></span><input v-model="analytics" type="checkbox"></label>
+      <label class="consent-option"><span><strong>{{ text(consent.marketing) }}</strong><small>{{ text(consent.marketing_description) }}</small></span><input v-model="marketing" type="checkbox"></label>
+      <div class="consent-actions"><button type="button" class="secondary" @click="rejectOptional">{{ text(consent.reject) }}</button><button type="button" class="primary" @click="save(analytics, marketing)">{{ text(consent.save) }}</button></div>
     </template>
     <template v-else>
-      <div class="consent-copy"><strong>{{ isEnglish ? 'Your privacy choices' : 'اختيارات الخصوصية' }}</strong><p>{{ isEnglish ? 'StorePro uses essential storage for site security and saved preferences. Optional analytics and marketing measurement start only if you allow them.' : 'يستخدم StorePro التخزين الضروري لأمان الموقع وحفظ التفضيلات. لا تبدأ التحليلات وقياسات التسويق الاختيارية إلا بعد موافقتك.' }}</p></div>
-      <div class="consent-actions"><button type="button" class="secondary" @click="rejectOptional">{{ isEnglish ? 'Reject optional' : 'رفض الاختياري' }}</button><button type="button" class="secondary" @click="openSettings">{{ isEnglish ? 'Manage choices' : 'إدارة الاختيارات' }}</button><button type="button" class="primary" @click="acceptAll">{{ isEnglish ? 'Allow all' : 'السماح للكل' }}</button></div>
+      <div class="consent-copy"><strong>{{ text(consent.title) }}</strong><p>{{ text(consent.description) }}</p></div>
+      <div class="consent-actions"><button type="button" class="secondary" @click="rejectOptional">{{ text(consent.reject) }}</button><button type="button" class="secondary" @click="openSettings">{{ text(consent.manage) }}</button><button type="button" class="primary" @click="acceptAll">{{ text(consent.allow) }}</button></div>
     </template>
   </section>
 </template>
 
 <script setup lang="ts">
-const { isEnglish } = useLocale()
+const { page, text } = await useSiteContent()
+const global = page('global')
+const consent = computed(() => global.value.consent || {})
 const { preferences, needsChoice, settingsOpen, ready, acceptAll, rejectOptional, openSettings, save } = useConsent()
 const analytics = ref(false)
 const marketing = ref(false)

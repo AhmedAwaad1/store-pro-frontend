@@ -1,26 +1,27 @@
 <template>
   <section id="inquiry" class="sp-form-panel">
-    <div class="sp-form-intro"><span class="sp-eyebrow">{{ isEnglish ? 'Let’s talk' : 'ابدأ من هنا' }}</span><h2>{{ title || (isEnglish ? 'Tell us about your store' : 'احكِ لنا عن متجرك') }}</h2><p>{{ description || (isEnglish ? 'Share a few details and our team will contact you to discuss the right solution.' : 'أرسل بياناتك وسيتواصل معك فريقنا لمناقشة الحل المناسب.') }}</p></div>
+    <div class="sp-form-intro"><span class="sp-eyebrow">{{ text(formContent.eyebrow) }}</span><h2>{{ text(formContent.title) }}</h2><p>{{ text(formContent.description) }}</p></div>
     <form class="sp-lead-form" @submit.prevent="submit">
-      <label>{{ isEnglish ? 'Your name' : 'الاسم بالكامل' }}<input v-model.trim="form.name" name="name" autocomplete="name" required maxlength="120" /></label>
-      <label>{{ isEnglish ? 'Business name' : 'اسم النشاط التجاري' }}<input v-model.trim="form.business_name" name="business_name" autocomplete="organization" maxlength="255" /></label>
-      <label>{{ isEnglish ? 'Phone' : 'رقم الهاتف' }}<input v-model.trim="form.phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="32" :required="form.preferred_contact_method !== 'email'" /></label>
-      <label>{{ isEnglish ? 'Email' : 'البريد الإلكتروني' }}<input v-model.trim="form.email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="255" :required="form.preferred_contact_method === 'email'" /></label>
-      <label>{{ isEnglish ? 'How should we contact you?' : 'طريقة التواصل المفضلة' }}<select v-model="form.preferred_contact_method" name="preferred_contact_method"><option value="phone">{{ isEnglish ? 'Phone' : 'الهاتف' }}</option><option value="whatsapp">WhatsApp</option><option value="email">{{ isEnglish ? 'Email' : 'البريد الإلكتروني' }}</option></select></label>
-      <label>{{ isEnglish ? 'Interested in' : 'الخدمة المطلوبة' }}<select v-model="form.service_interest" name="service_interest"><option value="">{{ isEnglish ? 'Choose a service' : 'اختر الخدمة' }}</option><option value="store-design">{{ isEnglish ? 'Store design and setup' : 'تصميم وتجهيز متجر' }}</option><option value="growth">{{ isEnglish ? 'Growth and integrations' : 'التوسع والتكاملات' }}</option><option value="mobile-app">{{ isEnglish ? 'Mobile application' : 'تطبيق جوال' }}</option><option value="custom">{{ isEnglish ? 'Custom solution' : 'حل مخصص' }}</option></select></label>
-      <label>{{ isEnglish ? 'Package' : 'الباقة' }}<select v-model="form.package_interest" name="package_interest"><option value="">{{ isEnglish ? 'Not sure yet' : 'لم أحدد بعد' }}</option><option value="starter">{{ isEnglish ? 'Essential' : 'الأساسية' }}</option><option value="growth">{{ isEnglish ? 'Professional' : 'الاحترافية' }}</option><option value="enterprise">{{ isEnglish ? 'Business' : 'الشركات' }}</option></select></label>
-      <label class="sp-form-wide">{{ isEnglish ? 'What do you need?' : 'كيف يمكننا مساعدتك؟' }}<textarea v-model.trim="form.message" name="message" rows="4" maxlength="5000" required /></label>
-      <div class="sp-form-wide sp-form-submit"><button class="sp-btn sp-btn-primary" type="submit" :disabled="busy">{{ busy ? (isEnglish ? 'Sending…' : 'جارٍ الإرسال…') : (isEnglish ? 'Send request' : 'أرسل طلبك') }} <StoreProDirectionalArrow v-if="!busy" :size="17" /></button><p v-if="statusMessage" :class="['sp-form-status', { 'sp-form-error': statusError }]" role="status" aria-live="polite">{{ statusMessage }}</p></div>
+      <label>{{ text(formContent.fields?.name) }}<input v-model.trim="form.name" name="name" autocomplete="name" required maxlength="120" /></label>
+      <label>{{ text(formContent.fields?.business_name) }}<input v-model.trim="form.business_name" name="business_name" autocomplete="organization" maxlength="255" /></label>
+      <label>{{ text(formContent.fields?.phone) }}<input v-model.trim="form.phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="32" :required="form.preferred_contact_method !== 'email'" /></label>
+      <label>{{ text(formContent.fields?.email) }}<input v-model.trim="form.email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="255" :required="form.preferred_contact_method === 'email'" /></label>
+      <label>{{ text(formContent.fields?.contact_method) }}<select v-model="form.preferred_contact_method" name="preferred_contact_method"><option value="phone">{{ text(formContent.options?.phone) }}</option><option value="whatsapp">{{ text(formContent.options?.whatsapp) }}</option><option value="email">{{ text(formContent.options?.email) }}</option></select></label>
+      <label>{{ text(formContent.fields?.service) }}<select v-model="form.service_interest" name="service_interest"><option value="">{{ text(formContent.options?.choose_service) }}</option><option value="store-design">{{ text(formContent.options?.store_design) }}</option><option value="growth">{{ text(formContent.options?.growth) }}</option><option value="mobile-app">{{ text(formContent.options?.mobile_app) }}</option><option value="custom">{{ text(formContent.options?.custom) }}</option></select></label>
+      <label>{{ text(formContent.fields?.package) }}<select v-model="form.package_interest" name="package_interest"><option value="">{{ text(formContent.options?.not_sure) }}</option><option value="starter">{{ text(formContent.options?.starter) }}</option><option value="growth">{{ text(formContent.options?.professional) }}</option><option value="enterprise">{{ text(formContent.options?.business) }}</option></select></label>
+      <label class="sp-form-wide">{{ text(formContent.fields?.message) }}<textarea v-model.trim="form.message" name="message" rows="4" maxlength="5000" required /></label>
+      <div class="sp-form-wide sp-form-submit"><button class="sp-btn sp-btn-primary" type="submit" :disabled="busy">{{ busy ? text(formContent.sending) : text(formContent.send) }} <StoreProDirectionalArrow v-if="!busy" :size="17" /></button><p v-if="statusMessage" :class="['sp-form-status', { 'sp-form-error': statusError }]" role="status" aria-live="polite">{{ statusMessage }}</p></div>
     </form>
   </section>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ title?: string; description?: string; source?: string }>()
-const { isEnglish } = useLocale()
+const props = withDefaults(defineProps<{ content?: Record<string, any>; source?: string }>(), { content: () => ({}) })
+const { text } = await useSiteContent()
 const { request } = useApi()
 const route = useRoute()
 const config = useRuntimeConfig()
+const formContent = computed(() => props.content || {})
 const busy = ref(false)
 const statusMessage = ref('')
 const statusError = ref(false)
@@ -32,7 +33,7 @@ const submit = async () => {
   statusMessage.value = ''
   statusError.value = false
   try {
-    const sourcePage = new URL(route.fullPath, String(config.public.siteUrl || 'https://storepro.com')).toString()
+    const sourcePage = new URL(route.fullPath, String(config.public.siteUrl || '')).toString()
     await request('/sales-inquiries', {
       method: 'POST',
       body: {
@@ -46,11 +47,11 @@ const submit = async () => {
         utm_term: queryValue(route.query.utm_term),
       },
     })
-    statusMessage.value = isEnglish.value ? 'Thank you. Our team will contact you soon.' : 'شكرًا لك، سيتواصل معك فريقنا قريبًا.'
+    statusMessage.value = text(formContent.value.success)
     Object.assign(form, { name: '', business_name: '', phone: '', email: '', preferred_contact_method: 'phone', service_interest: '', package_interest: '', message: '' })
-  } catch (error: any) {
+  } catch {
     statusError.value = true
-    statusMessage.value = error?.data?.message || (isEnglish.value ? 'We could not send your request. Please try again.' : 'تعذر إرسال طلبك. حاول مرة أخرى.')
+    statusMessage.value = text(formContent.value.error)
   } finally {
     busy.value = false
   }

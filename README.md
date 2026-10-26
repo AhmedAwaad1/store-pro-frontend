@@ -28,5 +28,5 @@ The static build generates the marketing routes and prerenders published blog ar
 
 ## Content and inquiries
 
-The public site loads testimonials and articles from the Laravel API. The consultation form submits sales inquiries to `/api/sales-inquiries`. Service descriptions, illustrative portfolio concepts, and package outlines are frontend content until StorePro adds dedicated content APIs.
+The public site loads bilingual page content, uploaded images, testimonials, and articles from the Laravel API. Administrators edit the home, services, about, portfolio, pricing, contact, blog, and shared site content from the admin CMS. The consultation form submits sales inquiries to `/api/sales-inquiries`.
 

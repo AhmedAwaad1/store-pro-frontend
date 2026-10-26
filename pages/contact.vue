@@ -1,8 +1,12 @@
 <template>
-  <main class="sp-page"><section class="sp-page-hero"><div class="sp-container"><span class="sp-eyebrow">{{ isEnglish ? 'Contact us' : 'تواصل معنا' }}</span><h1>{{ isEnglish ? 'Let’s talk about your online store' : 'لنتحدث عن متجرك الإلكتروني' }}</h1><p>{{ isEnglish ? 'Share your plans with us and we will get back to you to discuss the right solution.' : 'شاركنا تفاصيل مشروعك وسيتواصل معك فريقنا لمناقشة الحل المناسب.' }}</p></div></section><section class="sp-section"><div class="sp-container sp-contact-layout"><div class="sp-contact-aside"><span class="sp-icon-bubble"><MessageCircle :size="24" /></span><h2>{{ isEnglish ? 'Tell us what you are building' : 'شاركنا ما تخطط لبنائه' }}</h2><p>{{ isEnglish ? 'A few details help us prepare a useful first conversation.' : 'تساعدنا بعض التفاصيل على تجهيز محادثة مفيدة حول احتياجك.' }}</p><ul><li><CheckCircle2 :size="17" />{{ isEnglish ? 'Store setup and design' : 'تجهيز المتجر وتصميمه' }}</li><li><CheckCircle2 :size="17" />{{ isEnglish ? 'Integrations and operations' : 'التكاملات وإدارة التشغيل' }}</li><li><CheckCircle2 :size="17" />{{ isEnglish ? 'A tailored project proposal' : 'عرض يناسب متطلبات مشروعك' }}</li></ul></div><StoreProLeadForm source="contact-page" /></div></section></main>
+  <main class="sp-page">
+    <section class="sp-page-hero"><div class="sp-container"><span class="sp-eyebrow">{{ text(content.hero?.eyebrow) }}</span><h1>{{ text(content.hero?.title) }}</h1><p>{{ text(content.hero?.description) }}</p></div></section>
+    <section class="sp-section"><div class="sp-container sp-contact-layout"><div class="sp-contact-aside"><span class="sp-icon-bubble"><MessageCircle :size="24" /></span><h2>{{ text(content.aside?.title) }}</h2><p>{{ text(content.aside?.description) }}</p><ul><li v-for="(point, index) in content.aside?.points || []" :key="index"><CheckCircle2 :size="17" />{{ text(point) }}</li></ul></div><StoreProLeadForm :content="content.form" source="contact-page" /></div></section>
+  </main>
 </template>
 <script setup lang="ts">
 import { CheckCircle2, MessageCircle } from 'lucide-vue-next'
-const { isEnglish } = useLocale()
-useSeoMeta({ title: () => isEnglish.value ? 'Contact StorePro' : 'تواصل مع StorePro', description: () => isEnglish.value ? 'Talk to StorePro about building your online store.' : 'تواصل مع StorePro لمناقشة بناء متجرك الإلكتروني.' })
+const { page, text } = await useSiteContent()
+const content = page('contact')
+useSeoMeta({ title: () => text(content.value.meta_title), description: () => text(content.value.meta_description) })
 </script>

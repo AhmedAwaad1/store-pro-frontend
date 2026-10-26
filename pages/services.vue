@@ -1,11 +1,14 @@
 <template>
-  <main class="sp-page"><section class="sp-page-hero"><div class="sp-container"><span class="sp-eyebrow">{{ isEnglish ? 'Services' : 'خدماتنا' }}</span><h1>{{ isEnglish ? 'The tools and support to build your online store' : 'حلول متكاملة لبناء متجرك الإلكتروني' }}</h1><p>{{ isEnglish ? 'From storefront design to daily operations, get the pieces your business needs in one place.' : 'من تصميم المتجر إلى إدارته اليومية، اجمع احتياجات نشاطك في مكان واحد.' }}</p></div></section><section class="sp-section"><div class="sp-container"><div class="sp-service-grid sp-service-grid-large"><article v-for="service in services" :id="service.id" :key="service.id" class="sp-service-card"><span class="sp-icon-bubble"><component :is="iconMap[service.icon]" :size="24" /></span><h2>{{ storeProText(service.title, isEnglish) }}</h2><p>{{ storeProText(service.description, isEnglish) }}</p><NuxtLink class="sp-card-link" :to="`/contact?service=${service.id}#inquiry`">{{ isEnglish ? 'Discuss this service' : 'ناقش احتياجك' }} <StoreProDirectionalArrow :size="16" /></NuxtLink></article></div></div></section><section class="sp-section sp-section-soft"><div class="sp-container sp-inline-cta"><div><h2>{{ isEnglish ? 'Not sure what your store needs?' : 'غير متأكد من الحل المناسب؟' }}</h2><p>{{ isEnglish ? 'Describe your project and we will help you map the next steps.' : 'صف مشروعك وسنساعدك على تحديد الخطوات المناسبة.' }}</p></div><NuxtLink class="sp-btn sp-btn-primary" to="/contact#inquiry">{{ isEnglish ? 'Talk to our team' : 'تواصل مع فريقنا' }} <StoreProDirectionalArrow :size="17" /></NuxtLink></div></section></main>
+  <main class="sp-page">
+    <section class="sp-page-hero"><div class="sp-container"><span class="sp-eyebrow">{{ text(content.hero?.eyebrow) }}</span><h1>{{ text(content.hero?.title) }}</h1><p>{{ text(content.hero?.description) }}</p></div></section>
+    <section class="sp-section"><div class="sp-container"><div class="sp-service-grid sp-service-grid-large"><article v-for="(service, index) in content.items || []" :id="service.id" :key="index" class="sp-service-card"><span class="sp-icon-bubble"><component :is="iconMap[service.icon] || Store" :size="24" /></span><h2>{{ text(service.title) }}</h2><p>{{ text(service.description) }}</p><NuxtLink class="sp-card-link" :to="`/contact?service=${service.id}#inquiry`">{{ text(content.item_button) }} <StoreProDirectionalArrow :size="16" /></NuxtLink></article></div></div></section>
+    <section class="sp-section sp-section-soft"><div class="sp-container sp-inline-cta"><div><h2>{{ text(content.cta?.title) }}</h2><p>{{ text(content.cta?.description) }}</p></div><NuxtLink class="sp-btn sp-btn-primary" to="/contact#inquiry">{{ text(content.cta?.button) }} <StoreProDirectionalArrow :size="17" /></NuxtLink></div></section>
+  </main>
 </template>
 <script setup lang="ts">
 import { Boxes, CreditCard, LayoutDashboard, LifeBuoy, Smartphone, Store } from 'lucide-vue-next'
-import { storeProServices, storeProText } from '~/data/storepro'
-const { isEnglish } = useLocale()
-const services = storeProServices
+const { page, text } = await useSiteContent()
+const content = page('services')
 const iconMap = { Store, LayoutDashboard, Smartphone, Boxes, CreditCard, LifeBuoy }
-useSeoMeta({ title: () => isEnglish.value ? 'StorePro services' : 'خدمات StorePro', description: () => isEnglish.value ? 'Store design, operations, mobile, integrations, and support.' : 'تصميم المتجر وإدارته وتطبيقات الجوال والتكاملات والدعم الفني.' })
+useSeoMeta({ title: () => text(content.value.meta_title), description: () => text(content.value.meta_description) })
 </script>
