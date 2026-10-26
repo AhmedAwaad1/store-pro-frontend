@@ -18,7 +18,13 @@ export const useSiteContent = async () => {
       const records = Array.isArray(response.data) ? response.data : Array.isArray(response.data?.data) ? response.data.data : []
       return Object.fromEntries(records.map((record) => [record.page_key, record.content || {}]))
     },
-    { server: false, default: () => ({}) },
+    {
+      server: false,
+      default: () => ({}),
+      dedupe: 'defer',
+      getCachedData: (key, nuxtApp, context) =>
+        context.cause === 'initial' ? nuxtApp.payload.data[key] : undefined,
+    },
   )
 
   const page = (key: string): ComputedRef<Record<string, any>> => computed(() => pages.value?.[key] || {})
