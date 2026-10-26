@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Set `NUXT_PUBLIC_API_BASE` to the Laravel API URL when it is not `http://localhost:8000/api`. Set `NUXT_PUBLIC_SITE_URL` to the canonical public website origin before deployment.
+In development the API defaults to `http://localhost:8000/api`. On the production build host, create the Git-ignored `.env.production` file with `NUXT_PUBLIC_API_BASE=https://your-api-domain/api` and `NUXT_PUBLIC_SITE_URL=https://your-storefront-domain`; the build script reads it on every build, so the URL is configured once. Use `/api` only when the storefront host reverse-proxies that path to Laravel.
 
 ## Build
 

@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/store-pro.css', '~/assets/css/store-pro-theme.css', '~/assets/css/store-pro-admin.css'],
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000/api',
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || (process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : '/api'),
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://storepro.com',
     },
   },

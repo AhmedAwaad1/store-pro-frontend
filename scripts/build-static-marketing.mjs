@@ -2,7 +2,17 @@ import { spawnSync } from 'node:child_process'
 import { existsSync, readFileSync, readdirSync, rmSync } from 'node:fs'
 
 const projectRoot = process.cwd()
-const apiBase = process.env.NUXT_PUBLIC_API_BASE?.trim()
+const buildEnvironment = { ...process.env }
+const productionEnvFile = `${projectRoot}/.env.production`
+if (existsSync(productionEnvFile)) {
+  for (const line of readFileSync(productionEnvFile, 'utf8').split(/\r?\n/)) {
+    const match = line.match(/^\s*(NUXT_PUBLIC_API_BASE|NUXT_PUBLIC_SITE_URL)\s*=\s*(.*?)\s*$/)
+    if (!match || buildEnvironment[match[1]]) continue
+    buildEnvironment[match[1]] = match[2].replace(/^(['"])(.*)\1$/, '$2')
+  }
+}
+const apiBase = buildEnvironment.NUXT_PUBLIC_API_BASE?.trim()
+const siteOrigin = buildEnvironment.NUXT_PUBLIC_SITE_URL?.trim()
 const routes = new Set([
   '/', '/services', '/portfolio', '/pricing', '/about', '/contact', '/blog',
   '/admin', '/admin/dashboard', '/admin/login', '/admin/inquiries', '/admin/contacts', '/admin/content', '/admin/blog', '/admin/seo',
@@ -10,7 +20,9 @@ const routes = new Set([
 
 if (apiBase) {
   try {
-    const response = await fetch(new URL('blog', `${apiBase.replace(/\/$/, '')}/`), {
+    const resolvedApiBase = new URL(apiBase, siteOrigin)
+    const blogEndpoint = new URL('blog', `${resolvedApiBase.toString().replace(/\/+$/, '')}/`)
+    const response = await fetch(blogEndpoint, {
       headers: { Accept: 'application/json' },
       signal: AbortSignal.timeout(8000),
     })
@@ -21,12 +33,15 @@ if (apiBase) {
       if (typeof article?.slug === 'string' && article.slug.trim()) routes.add(`/blog/${encodeURIComponent(article.slug)}`)
     }
   } catch (error) {
-    console.warn(`Marketing build will omit blog article prerendering: ${error.message}`)
+    const message = apiBase.startsWith('/') && !siteOrigin
+      ? 'Set NUXT_PUBLIC_SITE_URL to resolve a relative API base during static generation.'
+      : error.message
+    console.warn(`Marketing build will omit blog article prerendering: ${message}`)
   }
 }
 
 const environment = {
-  ...process.env,
+  ...buildEnvironment,
   NUXT_STATIC_SITE_ROUTES: JSON.stringify([...routes]),
 }
 const fontCache = `${projectRoot}/node_modules/.cache/nuxt-google-fonts`

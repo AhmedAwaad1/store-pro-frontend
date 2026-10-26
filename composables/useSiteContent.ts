@@ -12,15 +12,11 @@ export const useSiteContent = async () => {
   const { data: pages, pending, error, refresh } = await useAsyncData<Record<string, Record<string, any>>>(
     'storepro-site-content',
     async () => {
-      try {
-        const response = await $fetch<{ data: SiteContentRecord[] }>('/site-content', {
-          baseURL: config.public.apiBase,
-        })
-        const records = Array.isArray(response.data) ? response.data : []
-        return Object.fromEntries(records.map((record) => [record.page_key, record.content || {}]))
-      } catch {
-        return {}
-      }
+      const response = await $fetch<{ data: SiteContentRecord[] | { data?: SiteContentRecord[] } }>('/site-content', {
+        baseURL: config.public.apiBase,
+      })
+      const records = Array.isArray(response.data) ? response.data : Array.isArray(response.data?.data) ? response.data.data : []
+      return Object.fromEntries(records.map((record) => [record.page_key, record.content || {}]))
     },
     { server: false, default: () => ({}) },
   )
