@@ -53,7 +53,7 @@
 
     <section id="portfolio" class="sp-section"><div class="sp-container">
       <div class="sp-section-head"><div><span class="sp-eyebrow">{{ text(home.portfolio?.eyebrow) }}</span><h2>{{ text(home.portfolio?.title) }}</h2><p>{{ text(home.portfolio?.description) }}</p></div><NuxtLink class="sp-text-link" to="/portfolio">{{ text(home.portfolio?.link_label) }} <StoreProDirectionalArrow :size="17" /></NuxtLink></div>
-      <div class="sp-portfolio-grid"><NuxtLink v-for="(item, index) in portfolio" :key="index" to="/portfolio" class="sp-portfolio-card"><div class="sp-portfolio-image"><img v-if="item.image_url" :src="item.image_url" :alt="text(item.title)" width="1448" height="1200" loading="lazy" decoding="async" /><span>{{ text(home.portfolio?.item_label) }}</span></div><div class="sp-portfolio-info"><div><h3>{{ text(item.title) }}</h3><p>{{ text(item.category) }}</p></div><StoreProDirectionalArrow :size="18" /></div></NuxtLink></div>
+      <div class="sp-portfolio-grid"><NuxtLink v-for="(item, index) in portfolio" :key="index" :to="item.url || '/portfolio'" :external="Boolean(item.url)" class="sp-portfolio-card"><div class="sp-portfolio-image"><img v-if="item.image_url" :src="item.image_url" :alt="text(item.title)" width="1448" height="1200" loading="lazy" decoding="async" /><span>{{ text(item.item_label || home.portfolio?.item_label) }}</span></div><div class="sp-portfolio-info"><div><h3>{{ text(item.title) }}</h3><p>{{ text(item.category) }}</p></div><StoreProDirectionalArrow :size="18" /></div></NuxtLink></div>
     </div></section>
 
     <section id="pricing" class="sp-section sp-section-soft"><div class="sp-container">
