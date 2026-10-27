@@ -36,6 +36,7 @@ const submit = async () => {
     const sourcePage = new URL(route.fullPath, String(config.public.siteUrl || '')).toString()
     await request('/sales-inquiries', {
       method: 'POST',
+      credentials: 'omit',
       body: {
         ...form,
         source: props.source || 'storepro-website',

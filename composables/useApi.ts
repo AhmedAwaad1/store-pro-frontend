@@ -26,8 +26,8 @@ export const useApi = () => {
 
     return await $fetch<ApiEnvelope<T>>(path, {
       baseURL,
-      ...requestOptions,
       credentials: 'include',
+      ...requestOptions,
       headers: {
         Accept: 'application/json',
         ...headers,
