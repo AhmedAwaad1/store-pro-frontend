@@ -2,9 +2,7 @@
   <header class="sp-header">
     <div class="sp-container sp-header-row">
       <NuxtLink class="sp-brand" to="/" :aria-label="text(global.brand_name)">
-        <img v-if="global.logo_image_url" class="sp-brand-image" :src="global.logo_image_url" :alt="text(global.brand_name)" />
-        <span v-else class="sp-brand-mark"><Store :size="23" stroke-width="2.5" /></span>
-        <span class="sp-brand-copy"><strong>{{ text(global.brand_name) }}</strong><small>{{ text(global.brand_subtitle) }}</small></span>
+        <img class="sp-founder-logo" src="/founderlinkx-logo.png" :alt="text(global.brand_name)" width="160" height="90" />
       </NuxtLink>
 
       <nav id="storepro-navigation" class="sp-nav" :class="{ 'sp-nav-open': menuOpen }" :aria-label="text(global.header?.navigation_label)">
@@ -35,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { Menu, Moon, Store, Sun, X } from 'lucide-vue-next'
+import { Menu, Moon, Sun, X } from 'lucide-vue-next'
 
 const menuOpen = ref(false)
 const { locale, setLocale } = useLocale()

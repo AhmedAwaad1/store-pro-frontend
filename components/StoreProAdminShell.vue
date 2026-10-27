@@ -1,9 +1,8 @@
 <template>
   <div class="sp-admin-root" dir="rtl">
     <header class="sp-admin-topbar">
-      <NuxtLink class="sp-admin-brand" to="/admin" aria-label="StorePro admin home">
-        <span class="sp-brand-mark"><Store :size="22" stroke-width="2.5" /></span>
-        <span><strong>StorePro</strong><small>إدارة المنصة</small></span>
+      <NuxtLink class="sp-admin-brand" to="/admin" aria-label="FounderLinkX admin home">
+        <img class="sp-founder-logo" src="/founderlinkx-logo.png" alt="FounderLinkX" width="160" height="90" />
       </NuxtLink>
 
       <div class="sp-admin-tools">
@@ -34,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ContactRound, ExternalLink, FileText, LayoutDashboard, LogOut, MessagesSquare, Moon, Search, Sun, Store } from 'lucide-vue-next'
+import { ContactRound, ExternalLink, FileText, LayoutDashboard, LogOut, MessagesSquare, Moon, Search, Sun } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()

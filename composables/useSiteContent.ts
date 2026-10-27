@@ -39,12 +39,13 @@ export const useSiteContent = async () => {
   }
 
   const page = (key: string): ComputedRef<Record<string, any>> => computed(() => pages.value?.[key] || {})
+  const rebrand = (value: string) => value.replace(/StorePro/g, 'FounderLinkX').replace(/ستور برو/g, 'FounderLinkX')
   const text = (value: unknown): string => {
-    if (typeof value === 'string' || typeof value === 'number') return String(value)
+    if (typeof value === 'string' || typeof value === 'number') return rebrand(String(value))
     if (!value || typeof value !== 'object') return ''
     const translations = value as Record<string, unknown>
     const selected = translations[locale.value] || translations.en || translations.ar
-    return typeof selected === 'string' || typeof selected === 'number' ? String(selected) : ''
+    return typeof selected === 'string' || typeof selected === 'number' ? rebrand(String(selected)) : ''
   }
 
   return { pages, page, text, pending, error, refresh, refreshSilently }

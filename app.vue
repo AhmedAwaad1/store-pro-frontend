@@ -8,7 +8,7 @@
       <div class="sp-content-status-card"><span class="sp-content-spinner" aria-hidden="true"></span><p>Loading website content…</p></div>
     </main>
     <main v-else-if="siteContentUnavailable" class="sp-content-status" role="alert">
-      <div class="sp-content-status-card"><span class="sp-content-status-mark" aria-hidden="true">!</span><p class="sp-content-status-eyebrow">STOREPRO WEBSITE</p><h1>Website content is unavailable</h1><p>We could not load this page’s content. Check the API connection and try again.</p><button type="button" class="sp-content-retry" :disabled="siteContentPending" @click="refreshSiteContent">Try again</button></div>
+      <div class="sp-content-status-card"><span class="sp-content-status-mark" aria-hidden="true">!</span><p class="sp-content-status-eyebrow">FOUNDERLINKX WEBSITE</p><h1>Website content is unavailable</h1><p>We could not load this page’s content. Check the API connection and try again.</p><button type="button" class="sp-content-retry" :disabled="siteContentPending" @click="refreshSiteContent">Try again</button></div>
     </main>
     <template v-else>
       <StoreProHeader />
@@ -52,14 +52,14 @@ const siteContentUnavailable = computed(() => {
 useHead(() => ({
   htmlAttrs: { lang: locale.value, dir: direction.value, 'data-theme': theme.value },
   title: text(global.value.meta?.site_title),
-  link: global.value.favicon_image_url ? [{ rel: 'icon', href: global.value.favicon_image_url }] : [],
+  link: [{ rel: 'icon', type: 'image/png', href: '/founderlinkx-mark.png' }],
   meta: [
     { name: 'color-scheme', content: 'light dark' },
     { name: 'theme-color', content: theme.value === 'dark' ? '#0B0F19' : '#F8FAFC' },
     { name: 'description', content: text(global.value.meta?.site_description) },
     { name: 'robots', content: noIndexRoute.value ? 'noindex,nofollow' : 'index,follow' },
   ],
-  script: [{ key: 'storepro-organization-jsonld', type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Organization', name: text(global.value.brand_name), url: siteOrigin.value, logo: global.value.favicon_image_url || '' }) }],
+  script: [{ key: 'storepro-organization-jsonld', type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Organization', name: text(global.value.brand_name), url: siteOrigin.value, logo: `${siteOrigin.value}/founderlinkx-logo.png` }) }],
 }))
 </script>
 

@@ -1,9 +1,8 @@
 <template>
   <main class="sp-admin-login" dir="rtl">
     <form class="sp-admin-login-card" @submit.prevent="submit">
-      <NuxtLink class="sp-admin-brand" to="/" aria-label="StorePro">
-        <span class="sp-brand-mark"><Store :size="23" stroke-width="2.5" /></span>
-        <span><strong>StorePro</strong><small>إدارة المنصة</small></span>
+      <NuxtLink class="sp-admin-brand" to="/" aria-label="FounderLinkX">
+        <img class="sp-founder-logo" src="/founderlinkx-logo.png" alt="FounderLinkX" width="160" height="90" />
       </NuxtLink>
       <div class="sp-admin-login-copy">
         <span class="sp-admin-eyebrow">مساحة العمل</span>
@@ -20,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { Store } from 'lucide-vue-next'
 
 const email = ref('')
 const password = ref('')
