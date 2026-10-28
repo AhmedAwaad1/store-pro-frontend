@@ -1,25 +1,63 @@
 <template>
-  <main class="sp-page"><section class="sp-section sp-blog-detail"><div class="sp-container sp-blog-article"><NuxtLink class="sp-text-link" to="/blog"><ArrowUpRight :size="17" />{{ text(content.all_articles) }}</NuxtLink><div v-if="pending" class="sp-empty-state" role="status">{{ text(content.loading_article) }}</div><div v-else-if="article"><header><span class="sp-eyebrow">{{ text(content.article_label) }}</span><h1>{{ articleTitle }}</h1><p>{{ articleDescription }}</p><small>{{ formatDate(article.published_at) }}</small></header><img v-if="article.image" class="sp-blog-cover" :src="article.image" :alt="articleTitle" width="1200" height="720" /><div class="sp-rich-content" :dir="locale === 'ar' ? 'rtl' : 'ltr'" v-html="safeContent" /></div><div v-else class="sp-empty-state"><h1>{{ text(content.not_found) }}</h1><NuxtLink class="sp-btn sp-btn-primary" to="/blog">{{ text(content.back_articles) }}</NuxtLink></div></div></section></main>
+  <main class="nouran-article-page">
+    <article v-if="article" class="nouran-article-detail">
+      <header class="nouran-article-heading">
+        <div class="container">
+          <NuxtLink class="nouran-articles-back" to="/blog">{{ content.blog.allArticles }} ←</NuxtLink>
+          <span class="section-kicker">{{ content.blog.articleLabel }}</span>
+          <h1>{{ articleTitle }}</h1>
+          <p v-if="articleDescription">{{ articleDescription }}</p>
+          <time v-if="article.published_at" :datetime="article.published_at">{{ formatDate(article.published_at) }}</time>
+        </div>
+      </header>
+      <div class="container nouran-article-body">
+        <img v-if="article.image" class="nouran-article-cover" :src="article.image" :alt="articleTitle" width="1200" height="720" fetchpriority="high" decoding="async" />
+        <div class="nouran-rich-content" dir="rtl" v-html="safeContent" />
+        <NuxtLink class="nouran-articles-back nouran-article-back-bottom" to="/blog">{{ content.blog.allArticles }} ←</NuxtLink>
+      </div>
+    </article>
+    <section v-else class="container nouran-article-not-found">
+      <span class="section-kicker">{{ content.blog.articleLabel }}</span>
+      <h1>{{ content.blog.notFound }}</h1>
+      <NuxtLink class="btn btn-primary" to="/blog">{{ content.blog.backToArticles }}</NuxtLink>
+    </section>
+    <NouranSiteFooter :content="content.footer" :brand="content.brand" :doctor-name="content.header.doctor" :instagram-url="settings.instagram_url" :whatsapp-url="settings.whatsapp_url" :year="year" />
+  </main>
 </template>
+
 <script setup lang="ts">
-import { ArrowUpRight } from 'lucide-vue-next'
+import { $fetch } from 'ofetch'
+import type { NouranBlogArticle } from '~/data/nouranSiteContent'
 import { sanitizePageHtml } from '~/utils/sanitizePageHtml'
-type BlogArticle = { title?: string; title_en?: string; title_ar?: string; description?: string; description_en?: string; description_ar?: string; content?: string; content_en?: string; content_ar?: string; slug: string; image?: string | null; published_at?: string | null }
+import NouranSiteFooter from '~/components/nouran/NouranSiteFooter.vue'
+
 const route = useRoute()
 const config = useRuntimeConfig()
-const { locale } = useLocale()
-const { page, text } = await useSiteContent()
-const content = page('blog')
-const global = page('global')
-const { data: article, pending } = await useAsyncData<BlogArticle | null>(() => `storepro-blog-${String(route.params.slug)}`, async () => {
-  try { const response = await $fetch<{ data: BlogArticle }>(`/blog/${encodeURIComponent(String(route.params.slug))}`, { baseURL: config.public.apiBase }); return response.data }
-  catch { return null }
-}, { server: false, default: () => null })
-const articleTitle = computed(() => article.value ? (locale.value === 'ar' ? article.value.title_ar || article.value.title || article.value.title_en : article.value.title_en || article.value.title || article.value.title_ar) || '' : '')
-const articleDescription = computed(() => article.value ? (locale.value === 'ar' ? article.value.description_ar || article.value.description || article.value.description_en : article.value.description_en || article.value.description || article.value.description_ar) || '' : '')
-const articleContent = computed(() => article.value ? (locale.value === 'ar' ? article.value.content_ar || article.value.content || article.value.content_en : article.value.content_en || article.value.content || article.value.content_ar) || '' : '')
+const apiBase = useApiBaseUrl()
+const slug = String(route.params.slug || '')
+const { content, settings } = await useNouranCms()
+const { data: article } = await useAsyncData<NouranBlogArticle | null>(`nouran-article:${slug}`, async () => {
+  try {
+    const response = await $fetch(`/blog/${encodeURIComponent(slug)}`, { baseURL: apiBase, timeout: 8000 }) as { data?: NouranBlogArticle }
+    return response.data || null
+  } catch {
+    return null
+  }
+}, { default: () => null })
+
+if (!article.value && import.meta.server) setResponseStatus(404)
+
+const articleTitle = computed(() => article.value?.title_ar || article.value?.title || article.value?.title_en || '')
+const articleDescription = computed(() => article.value?.description_ar || article.value?.description || article.value?.description_en || '')
+const articleContent = computed(() => article.value?.content_ar || article.value?.content || article.value?.content_en || '')
 const safeContent = computed(() => sanitizePageHtml(articleContent.value))
-const formatDate = (value?: string | null) => value ? new Intl.DateTimeFormat(locale.value === 'ar' ? 'ar-EG' : 'en', { dateStyle: 'medium' }).format(new Date(value)) : ''
-useSeoMeta({ title: () => articleTitle.value ? `${articleTitle.value} | ${text(global.value.brand_name)}` : text(content.value.meta_title), description: () => articleDescription.value })
-useHead(() => ({ link: [{ rel: 'canonical', href: `${String(config.public.siteUrl).replace(/\/$/, '')}/blog/${encodeURIComponent(String(route.params.slug))}` }] }))
+const formatDate = (value: string) => new Intl.DateTimeFormat('ar-EG', { dateStyle: 'medium' }).format(new Date(value))
+const year = new Date().getFullYear()
+const siteUrl = String(config.public.siteUrl || '').replace(/\/$/, '')
+const seoTitle = computed(() => article.value?.seo_title_ar || articleTitle.value || settings.value.seo.title)
+const seoDescription = computed(() => article.value?.seo_description_ar || articleDescription.value || settings.value.seo.description)
+const canonical = siteUrl ? `${siteUrl}/blog/${encodeURIComponent(slug)}` : undefined
+
+useSeoMeta({ title: () => `${seoTitle.value} | ${settings.value.website_name}`, description: () => seoDescription.value, ogTitle: () => seoTitle.value, ogDescription: () => seoDescription.value, ogType: 'article', ogLocale: 'ar_EG', ogImage: () => article.value?.image || settings.value.seo.social_image_url || undefined })
+useHead(() => ({ htmlAttrs: { lang: 'ar', dir: 'rtl' }, link: canonical ? [{ rel: 'canonical', href: canonical }] : [] }))
 </script>

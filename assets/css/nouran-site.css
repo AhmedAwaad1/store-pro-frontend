@@ -1,0 +1,2286 @@
+.nouran-site * {
+  box-sizing: border-box;
+}
+
+.nouran-site {
+  scroll-behavior: smooth;
+  scroll-padding-top: 95px;
+}
+
+.nouran-site {
+  margin: 0;
+  background: #f9f8f3;
+  color: #263b32;
+  font-family: "Tajawal",Tahoma,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nouran-site a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nouran-site button {
+  font: inherit;
+}
+
+.nouran-site img {
+  display: block;
+  max-width: 100%;
+}
+
+.nouran-site button,.nouran-site a,.nouran-site summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nouran-site .container {
+  width: min(1180px,calc(100% - 84px));
+  margin-inline: auto;
+}
+
+.nouran-site .skip-link {
+  position: absolute;
+  top: -100px;
+  right: 20px;
+  background: white;
+  padding: 10px;
+  z-index: 200;
+}
+
+.nouran-site .skip-link:focus {
+  top: 10px;
+}
+
+.nouran-site .announcement {
+  background: #415e4d;
+  color: #f4f1e5;
+  min-height: 31px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  padding: 7px 16px;
+  text-align: center;
+}
+
+.nouran-site .announcement-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #edc8ac;
+}
+
+.nouran-site .tiny-star {
+  color: #edc8ac;
+  font-size: 15px;
+}
+
+.nouran-site .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(249,248,243,.93);
+  border-bottom: 1px solid #e6e6db;
+  backdrop-filter: blur(18px);
+}
+
+.nouran-site .nav-bar {
+  min-height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.nouran-site .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 203px;
+}
+
+.nouran-site .brand-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: #ead7d8;
+  border: 1px solid #e4cbce;
+  color: #44624e;
+  font: 600 29px/1 Georgia,serif;
+}
+
+.nouran-site .brand-leaf {
+  position: absolute;
+  font-family: Georgia,serif;
+  font-size: 12px;
+  right: 0;
+  top: 1px;
+  color: #799775;
+}
+
+.nouran-site .brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  line-height: 1.2;
+}
+
+.nouran-site .brand-copy strong {
+  font-family: "DM Sans",sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.05em;
+}
+
+.nouran-site .brand-copy strong i {
+  font-family: Georgia,serif;
+  font-weight: 400;
+}
+
+.nouran-site .brand-copy small {
+  font: 600 8px/1.8 "DM Sans",sans-serif;
+  letter-spacing: .2em;
+  color: #8b9187;
+}
+
+.nouran-site .desktop-nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nouran-site .desktop-nav a {
+  font-weight: 700;
+  font-size: 14px;
+  color: #68776e;
+  position: relative;
+}
+
+.nouran-site .desktop-nav a:hover,.nouran-site .desktop-nav a.active {
+  color: #314d3e;
+}
+
+.nouran-site .desktop-nav a.active:after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: #c38f8d;
+  bottom: -14px;
+  right: calc(50% - 2px);
+}
+
+.nouran-site .nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 100px;
+  border: 1px solid #c3cfc2;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: background .2s;
+}
+
+.nouran-site .nav-cta span {
+  font-family: Arial;
+}
+
+.nouran-site .nav-cta:hover {
+  background: #eaf0e7;
+}
+
+.nouran-site .mobile-toggle,.nouran-site .mobile-nav {
+  display: none;
+}
+
+.nouran-site .hero {
+  position: relative;
+  overflow: hidden;
+  background: #f9f8f3;
+}
+
+.nouran-site .hero-ambient {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.nouran-site .ambient-one {
+  background: #f6f0e3;
+  width: 560px;
+  height: 560px;
+  top: -160px;
+  right: -340px;
+}
+
+.nouran-site .ambient-two {
+  background: #eee9e1;
+  width: 430px;
+  height: 440px;
+  bottom: -290px;
+  left: -200px;
+}
+
+.nouran-site .hero-grid {
+  min-height: 695px;
+  display: grid;
+  grid-template-columns: 1.04fr .96fr;
+  gap: 24px;
+  align-items: center;
+  position: relative;
+  padding-top: 52px;
+  padding-bottom: 36px;
+}
+
+.nouran-site .hero-copy {
+  z-index: 2;
+  padding-bottom: 20px;
+}
+
+.nouran-site .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #79907b;
+  direction: ltr;
+  justify-content: flex-end;
+  font: 700 10px "DM Sans",sans-serif;
+  letter-spacing: .20em;
+  white-space: nowrap;
+}
+
+.nouran-site .eyebrow-line {
+  width: 20px;
+  height: 1px;
+  background: #a9b7a1;
+}
+
+.nouran-site .hero h1 {
+  font-size: clamp(44px,5.45vw,75px);
+  letter-spacing: -.072em;
+  line-height: 1.24;
+  font-weight: 800;
+  margin: 21px 0 23px;
+  color: #2e4839;
+}
+
+.nouran-site .serif-highlight {
+  color: #c68b8c;
+  position: relative;
+  white-space: nowrap;
+}
+
+.nouran-site .serif-highlight:after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 3%;
+  width: 70%;
+  height: 10px;
+  background: linear-gradient(90deg,#efd6d1,transparent);
+  z-index: -1;
+  border-radius: 100%;
+}
+
+.nouran-site .hero-lead {
+  font-size: 17px;
+  line-height: 1.95;
+  color: #68766a;
+  max-width: 515px;
+  margin: 0 0 27px;
+  font-weight: 500;
+}
+
+.nouran-site .hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.nouran-site .btn {
+  min-height: 56px;
+  padding: 8px 21px;
+  display: inline-flex;
+  gap: 26px;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 800;
+  transition: transform .2s,background .2s;
+}
+
+.nouran-site .btn:hover {
+  transform: translateY(-3px);
+}
+
+.nouran-site .btn-primary {
+  background: #496550;
+  color: #fff;
+}
+
+.nouran-site .btn-primary:hover {
+  background: #344f3d;
+}
+
+.nouran-site .arrow-circle {
+  display: grid;
+  place-items: center;
+  background: #f9f7ef;
+  color: #3b5944;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font: 20px Arial,sans-serif;
+}
+
+.nouran-site .btn-text {
+  padding-inline: 0;
+  min-height: auto;
+  gap: 9px;
+  color: #43624f;
+  border-radius: 0;
+  border-bottom: 1px solid #9ea99a;
+}
+
+.nouran-site .btn-text span {
+  font-size: 19px;
+}
+
+.nouran-site .hero-small-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 42px;
+  color: #8b9687;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.nouran-site .note-sparkle {
+  color: #c99f9b;
+  font-size: 22px;
+}
+
+.nouran-site .hero-art {
+  position: relative;
+  height: 585px;
+  max-width: 540px;
+  justify-self: center;
+  width: 100%;
+  isolation: isolate;
+}
+
+.nouran-site .hero-halo {
+  position: absolute;
+  width: 405px;
+  height: 405px;
+  background: #dfe8da;
+  border-radius: 49% 51% 47% 53%;
+  left: 40px;
+  top: 80px;
+  transform: rotate(-15deg);
+}
+
+.nouran-site .hero-halo:after {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 1px solid #c8d5c4;
+  border-radius: 47% 53% 59% 41%;
+  transform: rotate(24deg);
+}
+
+.nouran-site .hero-sun {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: #efddcf;
+  top: 5px;
+  right: 80px;
+  z-index: -1;
+}
+
+.nouran-site .hero-photo-shell {
+  position: absolute;
+  top: 110px;
+  left: 82px;
+  width: 342px;
+  height: 405px;
+  border-radius: 180px 180px 30px 30px;
+  overflow: hidden;
+  border: 11px solid #f8f5ed;
+  box-shadow: 0 22px 53px #38513b1a;
+  transform: rotate(-2deg);
+  background: #eee2da;
+}
+
+.nouran-site .hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: none;
+  transform: scale(1.025);
+}
+
+.nouran-site .photo-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg,#263e2b42 0%,transparent 38%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.nouran-site .floating-card {
+  position: absolute;
+  background: #fffdfa;
+  box-shadow: 0 12px 40px #41564719;
+  z-index: 3;
+  border: 1px solid #f0ede7;
+}
+
+.nouran-site .quote-card {
+  border-radius: 20px 20px 20px 5px;
+  top: 160px;
+  right: 0;
+  padding: 16px 20px;
+  transform: rotate(6deg);
+  direction: ltr;
+}
+
+.nouran-site .quote-card p {
+  font: 400 20px/1.2 Georgia,serif;
+  margin: 0;
+  color: #4d6a54;
+}
+
+.nouran-site .quote-card strong {
+  font-style: italic;
+  color: #bd8886;
+  font-weight: 400;
+}
+
+.nouran-site .quote-flowers {
+  position: absolute;
+  right: 10px;
+  top: -31px;
+  color: #c79c9d;
+  font-size: 35px;
+}
+
+.nouran-site .evidence-card {
+  bottom: 75px;
+  left: 0;
+  padding: 15px 17px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 11px;
+  direction: ltr;
+  font: 500 12px/1.35 "DM Sans",sans-serif;
+  color: #607766;
+  transform: rotate(4deg);
+}
+
+.nouran-site .evidence-card strong {
+  font-weight: 700;
+}
+
+.nouran-site .circle-check {
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  background: #d8e7d4;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  color: #45674e;
+}
+
+.nouran-site .scribble-top {
+  position: absolute;
+  color: #d6a5a0;
+  font-size: 48px;
+  left: 55px;
+  top: 55px;
+}
+
+.nouran-site .hero-art-caption {
+  position: absolute;
+  bottom: 12px;
+  left: 170px;
+  color: #9aaa96;
+  letter-spacing: .19em;
+  font: 700 10px "DM Sans";
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.nouran-site .hero-caption-line {
+  width: 30px;
+  height: 1px;
+  background: #99ae92;
+}
+
+.nouran-site .leaf-one {
+  position: absolute;
+  width: 135px;
+  left: 0;
+  top: 300px;
+  z-index: -1;
+  transform: rotate(-25deg);
+}
+
+.nouran-site .hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 26px;
+  color: #9ca89a;
+  font: 600 10px "DM Sans";
+  letter-spacing: .16em;
+}
+
+.nouran-site .scroll-down {
+  font: 600 13px "Tajawal";
+  letter-spacing: 0;
+}
+
+.nouran-site .scroll-down span {
+  margin-inline-start: 8px;
+  font: 20px Georgia;
+}
+
+.nouran-site .value-strip {
+  border-top: 1px solid #e4e7de;
+  border-bottom: 1px solid #e4e7de;
+  background: #eff2ea;
+}
+
+.nouran-site .value-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  min-height: 87px;
+}
+
+.nouran-site .value-items>div {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #476451;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.nouran-site .value-icon {
+  font: 25px Georgia;
+  color: #bd8d8e;
+}
+
+.nouran-site .strip-divider {
+  height: 23px;
+  width: 1px;
+  background: #cdd8ca;
+}
+
+.nouran-site .section-pad {
+  padding-block: 115px;
+}
+
+.nouran-site .section-kicker {
+  font: 700 10px "DM Sans",sans-serif;
+  letter-spacing: .17em;
+  color: #9ba996;
+  direction: ltr;
+  display: inline-block;
+}
+
+.nouran-site .about {
+  background: #fdfcf9;
+}
+
+.nouran-site .about-grid {
+  display: grid;
+  grid-template-columns: .94fr 1.06fr;
+  gap: 116px;
+  align-items: center;
+}
+
+.nouran-site .about-visual {
+  position: relative;
+  height: 520px;
+}
+
+.nouran-site .about-visual-bg {
+  position: relative;
+  background: #e9eee3;
+  width: 100%;
+  height: 100%;
+  border-radius: 180px 180px 18px 18px;
+  overflow: hidden;
+}
+
+.nouran-site .about-visual-bg:before {
+  content: "";
+  position: absolute;
+  inset: 24px;
+  border: 1px solid #d0dcce;
+  border-radius: 170px 170px 14px 14px;
+}
+
+.nouran-site .about-portrait-wrap {
+  position: absolute;
+  bottom: 0;
+  right: 17%;
+  width: 64%;
+  height: 76%;
+  overflow: hidden;
+  border-radius: 140px 140px 0 0;
+  opacity: .98;
+  box-shadow: 0 0 0 9px #f7f6efaa;
+}
+
+.nouran-site .about-portrait-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.nouran-site .about-script {
+  position: absolute;
+  z-index: 2;
+  top: 63px;
+  right: 13%;
+  font: 30px/1.15 Georgia,serif;
+  color: #66806b;
+  direction: ltr;
+  text-align: center;
+}
+
+.nouran-site .about-script i {
+  font-weight: 400;
+  color: #ae8588;
+}
+
+.nouran-site .about-flower {
+  position: absolute;
+  font-size: 64px;
+  top: 20px;
+  left: 28px;
+  color: #c6a19f;
+  transform: rotate(19deg);
+}
+
+.nouran-site .about-side-label {
+  position: absolute;
+  left: 12px;
+  top: 200px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font: 700 9px "DM Sans";
+  letter-spacing: .18em;
+  color: #9cae97;
+}
+
+.nouran-site .about-sticker {
+  position: absolute;
+  bottom: 38px;
+  left: -35px;
+  background: #f2ddd9;
+  border: 6px solid #fdfcf9;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(-12deg);
+  font: 18px/1.15 Georgia,serif;
+  color: #916e70;
+  direction: ltr;
+}
+
+.nouran-site .about-sticker span {
+  font: 34px Georgia;
+}
+
+.nouran-site .about-copy {
+  padding-bottom: 10px;
+}
+
+.nouran-site .about h2,.nouran-site .section-intro h2,.nouran-site .services h2,.nouran-site .content h2,.nouran-site .faq h2,.nouran-site .contact h2 {
+  font-size: clamp(35px,4vw,54px);
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -.05em;
+  color: #304c3a;
+  margin: 18px 0;
+}
+
+.nouran-site .about h2 em,.nouran-site .section-intro h2 em,.nouran-site .services h2 em,.nouran-site .content h2 em,.nouran-site .faq h2 em,.nouran-site .contact h2 em {
+  color: #c28b8b;
+  font-style: normal;
+}
+
+.nouran-site .dot {
+  color: #c28b8b;
+}
+
+.nouran-site .about-copy p {
+  font-size: 16px;
+  color: #798579;
+  line-height: 2;
+  max-width: 525px;
+}
+
+.nouran-site .about-copy .body-big {
+  font-size: 20px;
+  line-height: 1.75;
+  color: #445e4c;
+  font-weight: 700;
+}
+
+.nouran-site .about-signature {
+  font: italic 27px Georgia,serif;
+  color: #bf9190;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 30px 0 21px;
+  direction: ltr;
+  justify-content: flex-end;
+}
+
+.nouran-site .about-signature span {
+  font: 28px Georgia;
+}
+
+.nouran-site .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 19px;
+  font-size: 15px;
+  font-weight: 800;
+  border-bottom: 1px solid #bdccc0;
+  padding-bottom: 7px;
+  color: #42644e;
+}
+
+.nouran-site .text-link:hover {
+  color: #a57171;
+}
+
+.nouran-site .text-link span {
+  font: 19px Arial;
+}
+
+.nouran-site .approach {
+  background: #f1f4ee;
+}
+
+.nouran-site .section-intro.center {
+  text-align: center;
+}
+
+.nouran-site .section-intro p {
+  color: #78867a;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 14px auto 0;
+}
+
+.nouran-site .approach-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 21px;
+  margin-top: 53px;
+}
+
+.nouran-site .approach-card {
+  background: #fffdfa;
+  border-radius: 23px;
+  padding: 25px 30px 33px;
+  min-height: 310px;
+  position: relative;
+  transition: transform .25s,box-shadow .25s;
+  border: 1px solid #e9ede5;
+}
+
+.nouran-site .approach-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 16px 35px #4259490d;
+}
+
+.nouran-site .step-num {
+  font: 700 12px "DM Sans";
+  color: #aab9a8;
+  letter-spacing: .03em;
+}
+
+.nouran-site .illustration {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 18px 0 22px;
+  display: grid;
+  place-items: center;
+}
+
+.nouran-site .illustration svg {
+  width: 77px;
+}
+
+.nouran-site .illo-heart {
+  background: #f3e7e3;
+}
+
+.nouran-site .illo-bowl {
+  background: #eef0e4;
+}
+
+.nouran-site .illo-plant {
+  background: #e4ede3;
+}
+
+.nouran-site .approach-card h3 {
+  font-size: 23px;
+  margin: 0 0 9px;
+  color: #3c5e48;
+  font-weight: 800;
+}
+
+.nouran-site .approach-card p {
+  font-size: 15px;
+  color: #808e81;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.nouran-site .services {
+  background: #49634f;
+  color: #fff;
+  overflow: hidden;
+}
+
+.nouran-site .service-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 90px;
+  align-items: center;
+}
+
+.nouran-site .services .section-kicker {
+  color: #c5d3c2;
+}
+
+.nouran-site .services h2 {
+  color: #fff;
+  font-size: clamp(36px,4.1vw,54px);
+}
+
+.nouran-site .services h2 em {
+  color: #e5bec0;
+}
+
+.nouran-site .service-copy>p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #dae5d8;
+  max-width: 470px;
+}
+
+.nouran-site .service-features {
+  display: grid;
+  gap: 15px;
+  margin: 32px 0;
+}
+
+.nouran-site .service-features>div {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.nouran-site .service-features>div>span {
+  margin-top: 3px;
+  background: #a7bba3;
+  color: #294d36;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.nouran-site .service-features p {
+  margin: 0;
+}
+
+.nouran-site .service-features strong {
+  display: block;
+  font-size: 18px;
+}
+
+.nouran-site .service-features small {
+  font-size: 14px;
+  color: #c4d2c5;
+  line-height: 1.6;
+  display: block;
+  margin-top: 3px;
+}
+
+.nouran-site .btn-light {
+  background: #f2efdf;
+  color: #3c5e48;
+}
+
+.nouran-site .btn-light .arrow-circle {
+  background: #4c6c55;
+  color: #fff;
+}
+
+.nouran-site .service-art {
+  height: 510px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.nouran-site .service-ring {
+  position: absolute;
+  border: 1px solid #a5b8a477;
+  border-radius: 50%;
+  width: 500px;
+  height: 500px;
+  left: 0;
+}
+
+.nouran-site .service-editorial {
+  width: 350px;
+  height: 440px;
+  border-radius: 190px 190px 14px 14px;
+  position: relative;
+  background: #dbe6d2;
+  overflow: hidden;
+  box-shadow: 0 20px 50px #1f372742;
+}
+
+.nouran-site .service-editorial:after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid #b9cdb4;
+  border-radius: 170px 170px 7px 7px;
+}
+
+.nouran-site .editorial-tag {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font: 700 10px "DM Sans";
+  letter-spacing: .18em;
+  color: #829e7f;
+}
+
+.nouran-site .big-olive {
+  position: absolute;
+  font: 230px Georgia;
+  color: #9bb79a;
+  top: 60px;
+  right: 40px;
+  transform: rotate(12deg);
+  opacity: .4;
+}
+
+.nouran-site .service-art-center {
+  position: absolute;
+  inset: 145px 30px auto;
+  text-align: center;
+  color: #496950;
+  direction: ltr;
+}
+
+.nouran-site .service-art-center>span {
+  font: 50px/1 Georgia,serif;
+}
+
+.nouran-site .service-art-center em {
+  color: #ba8988;
+}
+
+.nouran-site .service-art-center p {
+  direction: rtl;
+  font: 800 16px Tajawal;
+  margin-top: 38px;
+  color: #6f8d70;
+}
+
+.nouran-site .service-corners {
+  position: absolute;
+  bottom: 30px;
+  left: 35px;
+  right: 35px;
+  display: flex;
+  justify-content: space-between;
+  color: #a5ba9f;
+  font-size: 24px;
+}
+
+.nouran-site .service-seal {
+  position: absolute;
+  bottom: 20px;
+  right: -10px;
+  z-index: 1;
+  border-radius: 50%;
+  width: 138px;
+  height: 138px;
+  background: #edcfca;
+  color: #8c6a70;
+  transform: rotate(12deg);
+  border: 7px solid #49634f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  direction: ltr;
+  font: 10px/1.3 "DM Sans";
+  letter-spacing: .06em;
+}
+
+.nouran-site .service-seal strong {
+  font-size: 13px;
+  margin: 5px 0;
+}
+
+.nouran-site .service-seal span {
+  font: 23px Georgia;
+}
+
+.nouran-site .content {
+  background: #fdfcf9;
+}
+
+.nouran-site .content-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 42px;
+}
+
+.nouran-site .content-heading h2 {
+  margin-bottom: 9px;
+}
+
+.nouran-site .content-heading p {
+  color: #7d897c;
+  font-size: 16px;
+  margin: 0;
+}
+
+.nouran-site .content-heading .text-link {
+  margin-bottom: 7px;
+}
+
+.nouran-site .topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 23px;
+}
+
+.nouran-site .topic-card {
+  height: 410px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s;
+}
+
+.nouran-site .topic-card:hover {
+  transform: translateY(-6px);
+}
+
+.nouran-site .topic-one {
+  background: #ebeee4;
+}
+
+.nouran-site .topic-two {
+  background: #f2e6df;
+}
+
+.nouran-site .topic-three {
+  background: #e7ede7;
+}
+
+.nouran-site .topic-index {
+  font: 700 10px "DM Sans";
+  color: #799276;
+  letter-spacing: .17em;
+  position: absolute;
+  top: 27px;
+  right: 27px;
+}
+
+.nouran-site .topic-graphic {
+  height: 230px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.nouran-site .topic-graphic>span:first-child {
+  font: 170px Georgia;
+  color: #c3d5bb;
+}
+
+.nouran-site .topic-graphic.insulin>span:first-child {
+  font-size: 180px;
+  color: #b8cfae;
+  transform: rotate(17deg);
+}
+
+.nouran-site .topic-graphic.liver>span:first-child {
+  color: #dcbaa7;
+  font-size: 220px;
+  transform: rotate(16deg);
+}
+
+.nouran-site .topic-graphic.daily>span:first-child {
+  color: #c9d8b9;
+  font-size: 190px;
+}
+
+.nouran-site .svg-swirl,.nouran-site .handdrawn-lines,.nouran-site .small-leaves {
+  position: absolute;
+  top: 95px;
+  right: 43%;
+  font: 40px Georgia;
+  color: #8eab8a;
+}
+
+.nouran-site .handdrawn-lines {
+  color: #ca948b;
+  top: 123px;
+}
+
+.nouran-site .small-leaves {
+  font: 24px Georgia;
+  color: #90ae85;
+  top: 155px;
+  right: 24%;
+}
+
+.nouran-site .topic-bottom {
+  position: relative;
+  flex: 1;
+  padding: 16px 27px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.nouran-site .topic-tag {
+  font-size: 11px;
+  color: #84917f;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.nouran-site .topic-bottom h3 {
+  font-size: 25px;
+  line-height: 1.32;
+  color: #3e614a;
+  margin: 0;
+  font-weight: 800;
+  max-width: 250px;
+}
+
+.nouran-site .topic-arrow {
+  position: absolute;
+  bottom: 31px;
+  left: 26px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #adc0ad;
+  display: grid;
+  place-items: center;
+  font: 20px Arial;
+  color: #597359;
+}
+
+.nouran-site .reminder {
+  background: #fdfcf9;
+  padding-top: 0;
+}
+
+.nouran-site .reminder-panel {
+  background: #e8efe5;
+  border-radius: 24px;
+  text-align: center;
+  padding: 52px 35px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nouran-site .reminder-sparkle {
+  position: absolute;
+  top: 10px;
+  right: 10%;
+  font: 70px Georgia;
+  color: #cadacc;
+}
+
+.nouran-site .reminder-panel>h2 {
+  font-size: clamp(22px,3.3vw,42px);
+  font-weight: 800;
+  line-height: 1.6;
+  color: #3f604b;
+  margin: 19px auto;
+  letter-spacing: -.02em;
+}
+
+.nouran-site .reminder-panel>h2 em {
+  color: #b98288;
+  font-style: normal;
+}
+
+.nouran-site .reminder-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+  color: #8aa187;
+  font: italic 21px Georgia,serif;
+  direction: ltr;
+}
+
+.nouran-site .reminder-footer span {
+  width: 24px;
+  height: 1px;
+  background: #a5b9a0;
+}
+
+.nouran-site .faq {
+  background: #f9f8f3;
+  padding-top: 25px;
+}
+
+.nouran-site .faq-grid {
+  display: grid;
+  grid-template-columns: .7fr 1.3fr;
+  gap: 100px;
+}
+
+.nouran-site .faq-grid>div>p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #869488;
+}
+
+.nouran-site .faq-flower {
+  display: block;
+  font: 130px Georgia;
+  color: #dcded3;
+  margin-top: 20px;
+}
+
+.nouran-site .faq-list {
+  border-top: 1px solid #d7dfd4;
+}
+
+.nouran-site .faq details {
+  border-bottom: 1px solid #d7dfd4;
+  padding: 19px 0;
+}
+
+.nouran-site .faq summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 800;
+  color: #45644d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.nouran-site .faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.nouran-site .faq-plus {
+  font: 24px Georgia;
+  border: 1px solid #cdd8cd;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 32px;
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+
+.nouran-site .faq details[open] .faq-plus {
+  transform: rotate(45deg);
+}
+
+.nouran-site .faq details p {
+  font-size: 15px;
+  color: #768477;
+  line-height: 1.85;
+  margin: 12px 0 2px;
+  max-width: 590px;
+}
+
+.nouran-site .contact {
+  background: #f9f8f3;
+  padding: 0 0 90px;
+}
+
+.nouran-site .contact-panel {
+  background: #f2e1dd;
+  position: relative;
+  border-radius: 28px;
+  padding: 70px 24px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.nouran-site .contact-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.nouran-site .contact h2 {
+  font-size: clamp(37px,4.8vw,64px);
+  margin: 15px 0;
+}
+
+.nouran-site .contact p {
+  color: #7f8177;
+  font-size: 17px;
+  margin: 0 0 26px;
+}
+
+.nouran-site .contact .btn {
+  display: inline-flex;
+}
+
+.nouran-site .contact-flower {
+  position: absolute;
+  color: #e6c1bf;
+  font: 240px Georgia;
+  opacity: .65;
+}
+
+.nouran-site .flower-a {
+  top: -60px;
+  right: -30px;
+}
+
+.nouran-site .flower-b {
+  bottom: -130px;
+  left: -20px;
+}
+
+.nouran-site .site-footer {
+  background: #f9f8f3;
+}
+
+.nouran-site .footer-main {
+  border-top: 1px solid #e0e5dc;
+  padding: 37px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.nouran-site .footer-main>span {
+  color: #899388;
+  font-size: 14px;
+}
+
+.nouran-site .footer-social {
+  font: 700 13px "DM Sans";
+  color: #52765d;
+}
+
+.nouran-site .footer-bottom {
+  padding: 16px 0 26px;
+  border-top: 1px solid #e7ebe3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #a0a89d;
+  font-size: 12px;
+  gap: 16px;
+}
+
+.nouran-site .footer-bottom>span:first-child {
+  font-family: "DM Sans";
+}
+
+.nouran-site .article-cover {
+  overflow: hidden;
+  padding: 20px 20px 0;
+}
+
+.nouran-site .article-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.nouran-site .article-topic-card .topic-bottom h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.nouran-articles-page,.nouran-article-page {
+  min-height: 100vh;
+  background: #f9f8f3;
+  color: #263b32;
+}
+
+.nouran-articles-heading,.nouran-article-heading {
+  padding-block: clamp(56px, 9vw, 112px) 50px;
+  background: #f0f2eb;
+}
+
+.nouran-articles-back {
+  display: inline-flex;
+  margin-bottom: 30px;
+  color: #52765d;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nouran-articles-heading h1,.nouran-article-heading h1,.nouran-article-not-found h1 {
+  max-width: 850px;
+  margin: 12px 0;
+  color: #263b32;
+  font-size: clamp(34px, 5vw, 60px);
+  line-height: 1.35;
+}
+
+.nouran-articles-heading p,.nouran-article-heading p,.nouran-articles-empty p {
+  max-width: 700px;
+  margin: 0;
+  color: #59685b;
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.9;
+}
+
+.nouran-articles-section {
+  padding-block: clamp(48px, 7vw, 88px);
+}
+
+.nouran-articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.nouran-article-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e4e7de;
+  border-radius: 20px;
+  background: #fdfcf9;
+  box-shadow: 0 12px 30px rgba(66, 89, 73, .06);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.nouran-article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px rgba(66, 89, 73, .12);
+}
+
+.nouran-article-card>a {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+.nouran-article-card img,.nouran-article-placeholder {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  place-items: center;
+  object-fit: cover;
+  background: #e9eee5;
+  color: #8ca381;
+  font-size: 56px;
+}
+
+.nouran-article-card-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px;
+}
+
+.nouran-article-card-copy small,.nouran-article-heading time {
+  color: #798675;
+  font-size: 12px;
+}
+
+.nouran-article-card-copy h2 {
+  margin: 9px 0;
+  color: #3e614a;
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.nouran-article-card-copy p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0 0 18px;
+  color: #59685b;
+  line-height: 1.8;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.nouran-article-card-copy>span {
+  margin-top: auto;
+  color: #52765d;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.nouran-articles-empty,.nouran-article-not-found {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding-block: clamp(64px, 12vw, 150px);
+}
+
+.nouran-articles-empty>span {
+  color: #a2b99a;
+  font-size: 42px;
+}
+
+.nouran-articles-empty h2 {
+  margin: 0;
+  color: #3e614a;
+}
+
+.nouran-article-body {
+  max-width: 900px;
+  padding-block: 48px 90px;
+}
+
+.nouran-article-cover {
+  display: block;
+  width: 100%;
+  max-height: 560px;
+  margin: 0 auto 40px;
+  border-radius: 22px;
+  object-fit: cover;
+}
+
+.nouran-rich-content {
+  color: #34463a;
+  font-size: 18px;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+.nouran-rich-content h2,.nouran-rich-content h3,.nouran-rich-content h4 {
+  margin: 1.6em 0 .5em;
+  color: #3e614a;
+  line-height: 1.5;
+}
+
+.nouran-rich-content blockquote {
+  margin-inline: 0;
+  padding: 14px 22px;
+  border-inline-start: 3px solid #c28b8b;
+  background: #f0f2eb;
+}
+
+.nouran-rich-content a {
+  color: #52765d;
+  text-underline-offset: 3px;
+}
+
+.nouran-article-back-bottom {
+  margin-top: 46px;
+}
+
+.nouran-article-not-found {
+  min-height: 70vh;
+  align-content: center;
+}
+
+.nouran-article-heading time {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+@media (max-width: 760px) {
+  .nouran-articles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .nouran-articles-grid {
+    grid-template-columns: 1fr;
+  }
+  .nouran-article-card-copy {
+    padding: 18px;
+  }
+  .nouran-article-body {
+    padding-block: 28px 58px;
+  }
+  .nouran-article-cover {
+    border-radius: 14px;
+  }
+  .nouran-rich-content {
+    font-size: 16px;
+  }
+}
+
+.nouran-site .mobile-nav a:hover,.nouran-site .text-link:hover,.nouran-site .footer-social:hover {
+  opacity: .85;
+}
+
+.nouran-site [data-reveal] {
+  transition: transform .7s ease,opacity .7s ease;
+}
+
+@media (prefers-reduced-motion:no-preference) {
+  .nouran-site [data-reveal]:not(.revealed) {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (max-width:1080px) {
+  .nouran-site .container {
+    width: min(100% - 48px,1180px);
+  }
+  .nouran-site .desktop-nav {
+    gap: 16px;
+  }
+  .nouran-site .desktop-nav a {
+    font-size: 13px;
+  }
+  .nouran-site .hero-grid {
+    min-height: 625px;
+    grid-template-columns: 1fr .9fr;
+  }
+  .nouran-site .hero h1 {
+    font-size: 55px;
+  }
+  .nouran-site .hero-art {
+    transform: scale(.87);
+    transform-origin: center;
+  }
+  .nouran-site .about-grid {
+    gap: 60px;
+  }
+  .nouran-site .service-grid {
+    gap: 45px;
+  }
+  .nouran-site .service-art {
+    transform: scale(.9);
+  }
+  .nouran-site .nav-cta {
+    padding: 10px 13px;
+  }
+  .nouran-site .brand {
+    min-width: 190px;
+  }
+}
+
+@media (max-width:780px) {
+  .nouran-site .announcement {
+    font-size: 11px;
+  }
+  .nouran-site .site-header .container {
+    width: calc(100% - 38px);
+  }
+  .nouran-site .nav-bar {
+    min-height: 73px;
+  }
+  .nouran-site .desktop-nav,.nouran-site .nav-cta {
+    display: none;
+  }
+  .nouran-site .mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    padding: 9px;
+    cursor: pointer;
+  }
+  .nouran-site .mobile-toggle span {
+    width: 25px;
+    height: 2px;
+    background: #45624f;
+    border-radius: 3px;
+    transition: transform .2s;
+  }
+  .nouran-site .mobile-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nouran-site .mobile-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nouran-site .mobile-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .nouran-site .mobile-nav:not([hidden]) {
+    display: flex;
+    flex-direction: column;
+    background: #fdfcf9;
+    padding: 8px 24px 21px;
+    border-bottom: 1px solid #e5e7e1;
+    box-shadow: 0 20px 30px #263b3222;
+  }
+  .nouran-site .mobile-nav a {
+    padding: 13px 8px;
+    border-bottom: 1px solid #eef0eb;
+    font-weight: 800;
+    color: #4d6852;
+  }
+  .nouran-site .mobile-nav a:last-child {
+    background: #48634e;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    margin-top: 12px;
+    align-self: flex-start;
+  }
+  .nouran-site .hero-grid {
+    grid-template-columns: minmax(0,1fr);
+    padding-top: 56px;
+    gap: 8px;
+  }
+  .nouran-site .hero-copy {
+    min-width: 0;
+    text-align: center;
+    padding-bottom: 0;
+  }
+  .nouran-site .eyebrow {
+    justify-content: center;
+    white-space: normal;
+    font-size: 9px;
+  }
+  .nouran-site .hero h1 {
+    font-size: clamp(43px,8vw,65px);
+    margin-top: 16px;
+  }
+  .nouran-site .hero-lead {
+    margin-inline: auto;
+    font-size: 16px;
+  }
+  .nouran-site .hero-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+  .nouran-site .hero-small-note {
+    margin-top: 23px;
+    justify-content: center;
+  }
+  .nouran-site .hero-art {
+    margin-top: 5px;
+    margin-bottom: 0;
+    transform: scale(.91);
+    height: 510px;
+  }
+  .nouran-site .hero-bottom {
+    padding-top: 0;
+  }
+  .nouran-site .about-grid {
+    grid-template-columns: 1fr;
+    gap: 46px;
+  }
+  .nouran-site .about-visual {
+    max-width: 430px;
+    width: 90%;
+    margin-inline: auto;
+    order: 2;
+    height: 480px;
+  }
+  .nouran-site .about-copy {
+    order: 1;
+    text-align: center;
+  }
+  .nouran-site .about-copy p {
+    margin-inline: auto;
+  }
+  .nouran-site .about-signature {
+    justify-content: center;
+  }
+  .nouran-site .approach-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .nouran-site .approach-card:last-child {
+    grid-column: 1/-1;
+  }
+  .nouran-site .service-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .nouran-site .service-copy {
+    text-align: center;
+  }
+  .nouran-site .service-copy>p {
+    margin-inline: auto;
+  }
+  .nouran-site .service-features {
+    max-width: 500px;
+    text-align: right;
+    margin-inline: auto;
+  }
+  .nouran-site .service-art {
+    transform: scale(.85);
+    margin-top: -10px;
+    height: 420px;
+  }
+  .nouran-site .topic-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+  .nouran-site .topic-card:last-child {
+    grid-column: 1/-1;
+    height: 350px;
+  }
+  .nouran-site .topic-card:last-child .topic-graphic {
+    height: 170px;
+  }
+  .nouran-site .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .nouran-site .faq-flower {
+    display: none;
+  }
+  .nouran-site .section-pad {
+    padding-block: 85px;
+  }
+  .nouran-site .footer-main {
+    flex-wrap: wrap;
+  }
+  .nouran-site .footer-main>span {
+    width: 100%;
+    order: 3;
+  }
+  .nouran-site .footer-bottom {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width:530px) {
+  .nouran-site .container {
+    width: calc(100% - 34px);
+  }
+  .nouran-site .announcement {
+    gap: 7px;
+    font-size: 10px;
+    padding-inline: 8px;
+  }
+  .nouran-site .announcement .tiny-star {
+    font-size: 10px;
+  }
+  .nouran-site .brand-icon {
+    width: 39px;
+    height: 39px;
+    font-size: 26px;
+  }
+  .nouran-site .brand-copy strong {
+    font-size: 13px;
+  }
+  .nouran-site .brand-copy small {
+    font-size: 7px;
+  }
+  .nouran-site .hero-grid {
+    padding-top: 46px;
+  }
+  .nouran-site .hero h1 {
+    font-size: clamp(37px,10vw,48px);
+    line-height: 1.32;
+  }
+  .nouran-site .serif-highlight {
+    white-space: normal;
+  }
+  .nouran-site .hero-lead {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .nouran-site .hero-actions {
+    gap: 21px;
+  }
+  .nouran-site .btn {
+    font-size: 14px;
+    gap: 16px;
+    min-height: 51px;
+    padding: 6px 16px;
+  }
+  .nouran-site .hero-art {
+    margin-top: -12px;
+    max-width: 460px;
+    transform: scale(.76);
+    transform-origin: center top;
+    height: 425px;
+    width: 470px;
+    left: 50%;
+    translate: -50% 0;
+  }
+  .nouran-site .hero-halo {
+    left: 35px;
+  }
+  .nouran-site .hero-photo-shell {
+    left: 80px;
+  }
+  .nouran-site .hero-bottom-label {
+    display: none;
+  }
+  .nouran-site .hero-bottom {
+    justify-content: center;
+    padding-bottom: 23px;
+  }
+  .nouran-site .value-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    min-height: unset;
+    padding-block: 18px;
+  }
+  .nouran-site .value-items>div {
+    font-size: 12px;
+    justify-content: center;
+    gap: 7px;
+  }
+  .nouran-site .value-icon {
+    font-size: 18px;
+  }
+  .nouran-site .strip-divider {
+    display: none;
+  }
+  .nouran-site .section-pad {
+    padding-block: 72px;
+  }
+  .nouran-site .about h2,.nouran-site .section-intro h2,.nouran-site .services h2,.nouran-site .content h2,.nouran-site .faq h2,.nouran-site .contact h2 {
+    font-size: 36px;
+  }
+  .nouran-site .about-visual {
+    height: 390px;
+    max-width: 345px;
+  }
+  .nouran-site .about-sticker {
+    width: 120px;
+    height: 120px;
+    font-size: 14px;
+    left: -11px;
+    bottom: 30px;
+  }
+  .nouran-site .about-script {
+    font-size: 24px;
+  }
+  .nouran-site .about-copy .body-big {
+    font-size: 18px;
+  }
+  .nouran-site .about-copy p {
+    font-size: 15px;
+  }
+  .nouran-site .section-intro p {
+    font-size: 15px;
+  }
+  .nouran-site .approach-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    margin-top: 33px;
+  }
+  .nouran-site .approach-card:last-child {
+    grid-column: auto;
+  }
+  .nouran-site .approach-card {
+    min-height: auto;
+    padding: 23px;
+  }
+  .nouran-site .illustration {
+    width: 80px;
+    height: 80px;
+    margin: 10px 0;
+  }
+  .nouran-site .approach-card h3 {
+    font-size: 21px;
+  }
+  .nouran-site .approach-card p {
+    font-size: 14px;
+  }
+  .nouran-site .service-grid {
+    gap: 5px;
+  }
+  .nouran-site .service-copy>p {
+    font-size: 15px;
+  }
+  .nouran-site .service-features strong {
+    font-size: 16px;
+  }
+  .nouran-site .service-features small {
+    font-size: 13px;
+  }
+  .nouran-site .service-art {
+    transform: scale(.68);
+    transform-origin: center top;
+    height: 350px;
+    width: 490px;
+    position: relative;
+    left: 50%;
+    translate: -50% 0;
+    margin-top: 22px;
+  }
+  .nouran-site .service-ring {
+    left: -8px;
+  }
+  .nouran-site .service-seal {
+    right: 7px;
+  }
+  .nouran-site .content-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+  .nouran-site .content-heading .text-link {
+    font-size: 14px;
+  }
+  .nouran-site .topic-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .nouran-site .topic-card,.nouran-site .topic-card:last-child {
+    grid-column: auto;
+    height: 350px;
+  }
+  .nouran-site .topic-graphic,.nouran-site .topic-card:last-child .topic-graphic {
+    height: 180px;
+  }
+  .nouran-site .topic-graphic>span:first-child {
+    transform: scale(.8) !important;
+  }
+  .nouran-site .topic-bottom h3 {
+    font-size: 23px;
+  }
+  .nouran-site .reminder-panel {
+    padding: 42px 18px;
+  }
+  .nouran-site .reminder-panel>h2 {
+    font-size: 23px;
+  }
+  .nouran-site .reminder-footer {
+    font-size: 16px;
+  }
+  .nouran-site .faq summary {
+    font-size: 16px;
+  }
+  .nouran-site .contact-panel {
+    padding: 56px 18px;
+  }
+  .nouran-site .contact p {
+    font-size: 15px;
+  }
+  .nouran-site .contact-flower {
+    font-size: 150px;
+  }
+  .nouran-site .footer-main {
+    align-items: start;
+  }
+  .nouran-site .footer-bottom {
+    font-size: 11px;
+  }
+}
+
+/* Real-photo version: tailored framing and focus */
+
+.nouran-site .hero-photo {
+  object-position: center 36%;
+}
+
+.nouran-site .about-portrait-wrap img {
+  object-position: center 18%;
+}
+
+@media (max-width:530px) {
+  .nouran-site .hero-photo {
+    object-position: center 36%;
+  }
+}
+
+.nouran-site main {
+  color: #263b32;
+  background: transparent;
+}
+
+.nouran-site :focus-visible {
+  outline: 3px solid #49634f;
+  outline-offset: 3px;
+}
+
+html:has(.nouran-site) {
+  scroll-behavior: smooth;
+  scroll-padding-top: 95px;
+}
+
+.nouran-site {
+  --nouran-canvas: #f9f8f3;
+  --nouran-surface: #fdfcf9;
+  --nouran-ink: #263b32;
+  --nouran-muted: #59685b;
+  --nouran-sage: #49634f;
+  --nouran-blush: #c28b8b;
+  --nouran-blush-ink: #996269;
+  --nouran-line: #e4e7de;
+  --nouran-card-radius: 23px;
+  --nouran-card-shadow: 0 16px 35px rgba(66, 89, 73, .08);
+  overflow-x: clip;
+  background: var(--nouran-canvas);
+  color: var(--nouran-ink);
+}
+
+body:has(.nouran-site) {
+  margin: 0;
+}
+
+.nouran-site .about,
+.nouran-site .content,
+.nouran-site .reminder,
+.nouran-site .site-footer {
+  background: var(--nouran-surface);
+}
+
+.nouran-site .value-strip {
+  border-color: var(--nouran-line);
+}
+
+.nouran-site .approach-card {
+  border-radius: var(--nouran-card-radius);
+}
+
+.nouran-site .approach-card:hover,
+.nouran-site .topic-card:hover {
+  box-shadow: var(--nouran-card-shadow);
+}
+
+.nouran-site .hero-bottom,
+.nouran-site .hero-small-note,
+.nouran-site .hero-art-caption,
+.nouran-site .about-side-label,
+.nouran-site .about-copy p,
+.nouran-site .section-intro p,
+.nouran-site .content-heading p,
+.nouran-site .faq-grid > div > p,
+.nouran-site .faq details p,
+.nouran-site .contact p,
+.nouran-site .footer-main > span,
+.nouran-site .footer-bottom,
+.nouran-site .brand-copy small,
+.nouran-site .step-num,
+.nouran-site .topic-index,
+.nouran-site .topic-tag {
+  color: var(--nouran-muted);
+}
+
+.nouran-site .about .section-kicker,
+.nouran-site .approach .section-kicker,
+.nouran-site .content .section-kicker,
+.nouran-site .reminder .section-kicker,
+.nouran-site .faq .section-kicker,
+.nouran-site .contact .section-kicker {
+  color: var(--nouran-muted);
+}
+
+.nouran-site .serif-highlight,
+.nouran-site .about h2 em,
+.nouran-site .section-intro h2 em,
+.nouran-site .content h2 em,
+.nouran-site .faq h2 em,
+.nouran-site .contact h2 em,
+.nouran-site .reminder-panel > h2 em,
+.nouran-site .about-script i,
+.nouran-site .service-art-center em,
+.nouran-site .quote-card strong,
+.nouran-site .text-link:hover {
+  color: var(--nouran-blush-ink);
+}
+
+.nouran-site .approach-card:focus-within,
+.nouran-site .topic-card:focus-visible {
+  outline: 3px solid var(--nouran-sage);
+  outline-offset: 4px;
+}
+
+.nouran-site h1,
+.nouran-site h2,
+.nouran-site h3 {
+  text-wrap: balance;
+}
+
+.nouran-site p {
+  text-wrap: pretty;
+}
+
+.nouran-site .eyebrow,
+.nouran-site .editorial-tag,
+.nouran-site .service-art-center p,
+.nouran-site .service-seal strong,
+.nouran-site .reminder-footer {
+  color: var(--nouran-muted);
+}
+
+.nouran-site .service-seal {
+  color: #694d50;
+}
+
+.nouran-site .about-signature {
+  color: var(--nouran-blush-ink);
+}
+
+.nouran-site .note-sparkle {
+  color: var(--nouran-blush);
+}

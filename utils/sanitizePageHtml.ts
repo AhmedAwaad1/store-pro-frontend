@@ -20,7 +20,7 @@ export const sanitizePageHtml = (html: string): string => {
     if (['script', 'style', 'iframe', 'object', 'embed', 'svg', 'math', 'form'].includes(tag)) return
 
     const target = allowedTags.has(tag) ? document.createElement(tag) : parent
-    if (tag === 'a') {
+    if (tag === 'a' && target instanceof Element) {
       const href = node.getAttribute('href')?.trim() || ''
       if (/^(https?:|mailto:|tel:|\/|#)/i.test(href) && !href.startsWith('//')) {
         target.setAttribute('href', href)

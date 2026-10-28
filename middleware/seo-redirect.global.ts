@@ -5,6 +5,21 @@ const legacyRetailPrefixes = [
 export default defineNuxtRouteMiddleware(async (to) => {
   const isLegacyRetailRoute = legacyRetailPrefixes.some((prefix) => to.path === prefix || to.path.startsWith(`${prefix}/`))
   if (isLegacyRetailRoute) return navigateTo('/', { redirectCode: 301 })
+
+  const publicSectionRedirects: Record<string, string> = {
+    '/about': '#about',
+    '/services': '#services',
+    '/pricing': '#services',
+    '/contact': '#contact',
+    '/portfolio': '',
+    '/page': '',
+  }
+  const publicPath = to.path.replace(/\/+$/, '') || '/'
+  // Administration belongs to the standalone app; retired URLs use Nuxt's 404.
+  if (publicPath === '/admin' || publicPath.startsWith('/admin/')) return
+  if (publicSectionRedirects[publicPath] !== undefined) {
+    return navigateTo({ path: '/', hash: publicSectionRedirects[publicPath] }, { redirectCode: 301 })
+  }
   if (to.matched.length > 0) return
 
   const { request } = useApi()

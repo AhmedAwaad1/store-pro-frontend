@@ -7,8 +7,9 @@
 </template>
 <script setup lang="ts">
 import { Boxes, CreditCard, LayoutDashboard, LifeBuoy, Smartphone, Store } from 'lucide-vue-next'
+import type { Component } from 'vue'
 const { page, text } = await useSiteContent()
 const content = page('services')
-const iconMap = { Store, LayoutDashboard, Smartphone, Boxes, CreditCard, LifeBuoy }
+const iconMap: Record<string, Component> = { Store, LayoutDashboard, Smartphone, Boxes, CreditCard, LifeBuoy }
 useSeoMeta({ title: () => text(content.value.meta_title), description: () => text(content.value.meta_description) })
 </script>

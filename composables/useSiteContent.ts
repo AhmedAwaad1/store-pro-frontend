@@ -1,3 +1,5 @@
+import { $fetch } from 'ofetch'
+import { useAsyncData } from '#app'
 import type { ComputedRef } from 'vue'
 
 type SiteContentRecord = {
@@ -10,18 +12,18 @@ export const useSiteContent = async () => {
   const config = useRuntimeConfig()
   const { locale } = useLocale()
   const fetchPages = async (): Promise<Record<string, Record<string, any>>> => {
-    const apiBase = import.meta.server
-      ? new URL(String(config.public.apiBase).replace(/\/?$/, '/'), String(config.public.siteUrl)).toString()
-      : config.public.apiBase
-    const response = await $fetch<{ data: SiteContentRecord[] | { data?: SiteContentRecord[] } }>('/site-content', {
+    const apiBase = useApiBaseUrl()
+    const response = await $fetch('/site-content', {
       baseURL: apiBase,
       timeout: 8000,
-    })
-    const records = Array.isArray(response.data) ? response.data : Array.isArray(response.data?.data) ? response.data.data : []
+    }) as { data: SiteContentRecord[] | { data?: SiteContentRecord[] } }
+    const records: SiteContentRecord[] = Array.isArray(response.data)
+      ? response.data
+      : Array.isArray(response.data?.data) ? response.data.data : []
     return Object.fromEntries(records.map((record) => [record.page_key, record.content || {}]))
   }
   const { data: pages, pending, error, refresh } = await useAsyncData<Record<string, Record<string, any>>>(
-    'storepro-site-content', fetchPages,
+    'legacy-site-content', fetchPages,
     {
       default: () => ({}),
       dedupe: 'defer',
