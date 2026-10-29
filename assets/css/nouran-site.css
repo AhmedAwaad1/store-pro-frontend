@@ -717,9 +717,15 @@
   justify-content: center;
   text-align: center;
   transform: rotate(-12deg);
-  font: 18px/1.15 Georgia,serif;
+  font: 16px/1.15 Georgia,serif;
   color: #916e70;
   direction: ltr;
+}
+
+.nouran-site .about-sticker strong {
+  max-width: calc(100% - 8px);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 
 .nouran-site .about-sticker span {
@@ -1852,6 +1858,10 @@
     order: 1;
     text-align: center;
   }
+  .nouran-site .about h2 em {
+    display: inline-block;
+    white-space: nowrap;
+  }
   .nouran-site .about-copy p {
     margin-inline: auto;
   }
@@ -1865,10 +1875,11 @@
     grid-column: 1/-1;
   }
   .nouran-site .service-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0,1fr);
     gap: 0;
   }
   .nouran-site .service-copy {
+    min-width: 0;
     text-align: center;
   }
   .nouran-site .service-copy>p {
@@ -2016,7 +2027,7 @@
   .nouran-site .about-sticker {
     width: 120px;
     height: 120px;
-    font-size: 14px;
+    font-size: 13px;
     left: -11px;
     bottom: 30px;
   }
