@@ -9,7 +9,7 @@
     <div class="sp-container sp-footer-main">
       <div class="sp-footer-brand">
         <NuxtLink class="sp-brand" to="/" :aria-label="text(global.brand_name)">
-          <img class="sp-founder-logo" src="/founderlinkx-logo.png" :alt="text(global.brand_name)" width="160" height="90" />
+          <img class="sp-founder-logo" src="/founderlinkx-logo.png" :alt="text(global.brand_name)" width="1576" height="1098" />
         </NuxtLink>
         <p>{{ text(footer.brand_description) }}</p>
       </div>

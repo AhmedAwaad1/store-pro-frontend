@@ -2,7 +2,7 @@
   <main class="sp-admin-login" dir="rtl">
     <form class="sp-admin-login-card" @submit.prevent="submit">
       <NuxtLink class="sp-admin-brand" to="/" aria-label="FounderLinkX">
-        <img class="sp-founder-logo" src="/founderlinkx-logo.png" alt="FounderLinkX" width="160" height="90" />
+        <img class="sp-founder-logo" :src="theme === 'dark' ? '/founderlinkx-logo.png' : '/founderlinkx-logo-light.png'" alt="FounderLinkX" width="1576" height="1098" />
       </NuxtLink>
       <div class="sp-admin-login-copy">
         <span class="sp-admin-eyebrow">مساحة العمل</span>
@@ -25,6 +25,7 @@ const password = ref('')
 const loading = ref(false)
 const error = ref('')
 const { login, user, fetchCurrentUser } = useApi()
+const { theme } = useStoreProTheme()
 
 definePageMeta({ layout: false })
 

@@ -45,11 +45,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
 
 
-.sp-founder-logo{display:block;width:140px;height:76px;object-fit:contain;flex:none;background:#07172e;border-radius:8px;padding:3px 6px}
-@media(max-width:620px){.sp-founder-logo{width:105px;height:58px;padding:2px 4px}}
+.sp-founder-logo{display:block;width:145px;height:auto;max-height:104px;object-fit:contain;flex:none;background:transparent;border-radius:0;padding:0}
+@media(max-width:620px){.sp-founder-logo{width:112px;max-height:80px}}
 
 /* The header logo is a transparent image, so it does not need a colored frame. */
 .sp-header .sp-brand{align-self:center}
-.sp-header .sp-founder-logo{width:clamp(140px,12vw,168px);height:auto;max-height:90px;object-fit:contain;background:transparent;border-radius:0;padding:0}
-@media(max-width:620px){.sp-header .sp-founder-logo{width:126px;max-height:70px}}
-@media(max-width:400px){.sp-header .sp-founder-logo{width:112px;max-height:63px}}
+.sp-header .sp-founder-logo{width:clamp(136px,11vw,154px);height:auto;max-height:108px;object-fit:contain;background:transparent;border-radius:0;padding:0}
+@media(max-width:620px){.sp-header .sp-founder-logo{width:118px;max-height:83px}}
+@media(max-width:400px){.sp-header .sp-founder-logo{width:105px;max-height:74px}}

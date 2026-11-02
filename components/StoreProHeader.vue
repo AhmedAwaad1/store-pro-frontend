@@ -2,7 +2,7 @@
   <header class="sp-header">
     <div class="sp-container sp-header-row">
       <NuxtLink class="sp-brand" to="/" :aria-label="text(global.brand_name)">
-        <img class="sp-founder-logo" src="/founderlinkx-logo.png" :alt="text(global.brand_name)" width="160" height="90" />
+        <img class="sp-founder-logo" :src="theme === 'dark' ? '/founderlinkx-logo.png' : '/founderlinkx-logo-light.png'" :alt="text(global.brand_name)" width="1576" height="1098" />
       </NuxtLink>
 
       <nav id="storepro-navigation" class="sp-nav" :class="{ 'sp-nav-open': menuOpen }" :aria-label="text(global.header?.navigation_label)">

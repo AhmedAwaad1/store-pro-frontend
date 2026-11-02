@@ -59,7 +59,7 @@ useHead(() => ({
     { name: 'description', content: text(global.value.meta?.site_description) },
     { name: 'robots', content: noIndexRoute.value ? 'noindex,nofollow' : 'index,follow' },
   ],
-  script: [{ key: 'storepro-organization-jsonld', type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Organization', name: text(global.value.brand_name), url: siteOrigin.value, logo: `${siteOrigin.value}/founderlinkx-logo.png` }) }],
+  script: [{ key: 'storepro-organization-jsonld', type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Organization', name: text(global.value.brand_name), url: siteOrigin.value, logo: `${siteOrigin.value}/founderlinkx-logo-light.png` }) }],
 }))
 </script>
 
