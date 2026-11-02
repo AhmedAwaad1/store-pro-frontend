@@ -58,7 +58,40 @@
 
     <section id="pricing" class="sp-section sp-section-soft"><div class="sp-container">
       <div class="sp-section-head sp-section-head-centered"><div><span class="sp-eyebrow">{{ text(home.pricing?.eyebrow) }}</span><h2>{{ text(home.pricing?.title) }}</h2><p>{{ text(home.pricing?.description) }}</p></div></div>
-      <div class="sp-pricing-grid"><article v-for="(plan, index) in plans" :key="index" class="sp-price-card" :class="{ 'sp-price-card-featured': plan.popular }"><span v-if="plan.popular" class="sp-popular-tag">{{ text(home.pricing?.popular_label) }}</span><h3>{{ text(plan.title) }}</h3><p>{{ text(plan.description) }}</p><strong class="sp-price-label">{{ text(home.pricing?.custom_price) }}</strong><ul><li v-for="(feature, index) in plan.features || []" :key="index"><Check :size="16" />{{ text(feature) }}</li></ul><NuxtLink class="sp-btn" :class="plan.popular ? 'sp-btn-primary' : 'sp-btn-outline'" :to="`/contact?package=${plan.id}#inquiry`">{{ text(home.pricing?.request_label) }} <StoreProDirectionalArrow :size="16" /></NuxtLink></article></div>
+      <div class="sp-pricing-grid">
+        <article
+          v-for="(plan, index) in plans"
+          :key="index"
+          class="sp-price-card"
+          :class="{ 'sp-price-card-featured': plan.popular, 'sp-price-card-sale': plan.current_price }"
+        >
+          <span v-if="plan.popular" class="sp-popular-tag">{{ text(home.pricing?.popular_label) }}</span>
+          <h3>{{ text(plan.title) }}</h3>
+          <span v-if="!isEnglish && text(plan.subtitle)" class="sp-plan-subtitle">{{ text(plan.subtitle) }}</span>
+          <p>{{ text(plan.description) }}</p>
+          <div v-if="plan.current_price" class="sp-plan-price" :class="{ 'sp-promo-pricing': plan.promo_label || plan.original_price }">
+            <span v-if="plan.promo_label" class="sp-promo-label">{{ text(plan.promo_label) }}</span>
+            <div class="sp-price-values">
+              <span v-if="plan.original_price_label && plan.original_price" class="sp-original-price">
+                <span>{{ text(plan.original_price_label) }}</span>
+                <del><bdi>{{ text(plan.original_price) }}</bdi></del>
+              </span>
+              <del v-else-if="plan.original_price"><bdi>{{ text(plan.original_price) }}</bdi></del>
+              <strong class="sp-price-current"><bdi>{{ text(plan.current_price) }}</bdi></strong>
+            </div>
+          </div>
+          <strong v-else class="sp-price-label">{{ text(home.pricing?.custom_price) }}</strong>
+          <h4 v-if="text(plan.features_heading)" class="sp-plan-features-title">{{ text(plan.features_heading) }}</h4>
+          <ul>
+            <li v-for="(feature, featureIndex) in plan.features || []" :key="featureIndex">
+              <Check :size="16" />{{ text(feature) }}
+            </li>
+          </ul>
+          <NuxtLink class="sp-btn" :class="plan.popular ? 'sp-btn-primary' : 'sp-btn-outline'" :to="`/contact?package=${plan.id}#inquiry`">
+            {{ text(plan.action_label || home.pricing?.request_label) }} <StoreProDirectionalArrow :size="16" />
+          </NuxtLink>
+        </article>
+      </div>
     </div></section>
 
     <section v-if="testimonials.length" id="testimonials" class="sp-section"><div class="sp-container"><div class="sp-section-head"><div><span class="sp-eyebrow">{{ text(home.testimonials?.eyebrow) }}</span><h2>{{ text(home.testimonials?.title) }}</h2></div></div><div class="sp-testimonial-grid"><article v-for="item in testimonials.slice(0, 3)" :key="item.id" class="sp-testimonial-card"><Quote :size="24" /><blockquote>{{ item.quote }}</blockquote><div class="sp-testimonial-author"><img v-if="item.avatar_url" :src="item.avatar_url" alt="" width="48" height="48" loading="lazy" /><span><strong>{{ item.author_name }}</strong><small>{{ [item.author_title, item.company_name].filter(Boolean).join(' · ') }}</small></span></div></article></div></div></section>
